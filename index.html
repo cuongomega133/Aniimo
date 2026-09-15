@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Aniimo Guide VN — Cẩm Nang Toàn Diện</title>
+<style>
+  :root{
+    --bg:#0f1115; --card:#171a21; --card2:#1e222b; --border:#2a2f3a;
+    --fg:#e8eaf0; --muted:#9aa1af; --accent:#f5a524; --accent2:#f43f5e; --accent3:#38bdf8;
+    --good:#22c55e; --warn:#f43f5e;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#f7f7fb; --card:#ffffff; --card2:#f1f2f6; --border:#e3e5ec; --fg:#14161c; --muted:#5b6472; }
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;padding-bottom:60px;}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 16px;}
+  header.top{padding:22px 16px 14px;text-align:center;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:20;}
+  header.top h1{margin:0 0 4px;font-size:1.5rem;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  header.top p{margin:0;color:var(--muted);font-size:.8rem;}
+  .warn-banner{background:rgba(244,63,94,.12);border:1px solid var(--warn);color:var(--fg);padding:10px 14px;border-radius:12px;margin:14px auto;max-width:1100px;font-size:.85rem;line-height:1.5;}
+  .warn-banner b{color:var(--warn);}
+  nav.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;max-width:1100px;margin:10px auto;padding:0 16px;}
+  @media(min-width:700px){nav.tabs{grid-template-columns:repeat(8,1fr);}}
+  nav.tabs button{background:var(--card);border:1px solid var(--border);color:var(--fg);padding:8px 4px;border-radius:10px;font-size:.68rem;cursor:pointer;font-weight:600;}
+  nav.tabs button.active{background:var(--accent);color:#1a1a1a;border-color:var(--accent);}
+  section{display:none;max-width:1100px;margin:0 auto;padding:8px 16px 30px;}
+  section.active{display:block;}
+  h2{font-size:1.2rem;border-left:4px solid var(--accent);padding-left:10px;margin:22px 0 10px;}
+  h2:first-child{margin-top:6px;}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:12px;}
+  table{width:100%;border-collapse:collapse;font-size:.8rem;}
+  th,td{padding:6px 8px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top;}
+  th{color:var(--muted);font-weight:600;position:sticky;top:0;background:var(--card);}
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px;}
+  .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.65rem;font-weight:700;margin-right:4px;}
+  .pill.t0{background:#f43f5e;color:#fff;} .pill.t05{background:#fb923c;color:#1a1a1a;}
+  .pill.t1{background:#facc15;color:#1a1a1a;} .pill.t2{background:#4ade80;color:#1a1a1a;}
+  .pill.t25{background:#38bdf8;color:#1a1a1a;} .pill.t3{background:#94a3b8;color:#1a1a1a;}
+  .filters{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0;}
+  .filters input[type=text]{flex:1 1 200px;padding:9px 12px;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:var(--fg);font-size:.85rem;}
+  .chip{padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:var(--card2);color:var(--fg);font-size:.72rem;cursor:pointer;}
+  .chip.active{background:var(--accent);color:#1a1a1a;border-color:var(--accent);}
+  .grid{display:grid;grid-template-columns:1fr;gap:10px;}
+  @media(min-width:640px){.grid{grid-template-columns:1fr 1fr;}}
+  @media(min-width:960px){.grid{grid-template-columns:1fr 1fr 1fr;}}
+  .mon{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 14px;}
+  .mon h4{margin:0 0 4px;font-size:.95rem;}
+  .mon .meta{color:var(--muted);font-size:.72rem;margin-bottom:6px;}
+  .mon .desc{font-size:.78rem;line-height:1.4;color:var(--fg);opacity:.9;}
+  .mon .loc{font-size:.7rem;color:var(--muted);margin-top:6px;border-top:1px dashed var(--border);padding-top:6px;}
+  footer{max-width:1100px;margin:30px auto 0;padding:16px;border-top:1px solid var(--border);color:var(--muted);font-size:.72rem;line-height:1.6;}
+  code{background:var(--card2);padding:1px 5px;border-radius:5px;}
+  .src{font-size:.65rem;color:var(--accent3);font-weight:700;text-transform:uppercase;letter-spacing:.03em;}
+  ul{padding-left:20px;} li{margin-bottom:4px;font-size:.85rem;}
+  .count{color:var(--muted);font-size:.75rem;margin-bottom:8px;}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <h1>🎮 Aniimo Guide VN</h1>
+  <p>Cẩm nang cộng đồng — cập nhật lần cuối: 15/09/2026 · game ra mắt 16/09/2026</p>
+</header>
+
+<div class="wrap">
+<div class="warn-banner">
+  ⚠️ <b>Lưu ý quan trọng:</b> Hệ thống <b>Rune</b> và <b>Gacha</b> đã bị nhà phát triển Pawprint Studio <b>gỡ bỏ hoàn toàn</b> trước ngày ra mắt (thông báo 03/09/2026). Một số nội dung cũ nhắc tới "Rune Crafting" chỉ còn giá trị lịch sử. Trang này tổng hợp từ nhiều nguồn cộng đồng + wiki chính thức — có thể còn sai lệch nhỏ, sẽ cập nhật liên tục sau khi game ra mắt.
+</div>
+</div>
+
+<nav class="tabs" id="tabs">
+  <button data-tab="tong-quan" class="active">Tổng Quan</button>
+  <button data-tab="aniidex">Aniidex</button>
+  <button data-tab="tier-list">Tier List</button>
+  <button data-tab="doi-hinh">Đội Hình</button>
+  <button data-tab="vat-pham">Vật Phẩm</button>
+  <button data-tab="nguoi-moi">Người Mới</button>
+  <button data-tab="roadmap">Roadmap &amp; PvP</button>
+  <button data-tab="su-kien">Sự Kiện</button>
+</nav>
+
+<section id="tong-quan" class="active">
+  <h2>Thông tin phát hành</h2>
+  <div class="card">
+    <ul>
+      <li><b>Thể loại:</b> ARPG hành động thời gian thực, thu phục sinh vật thế giới mở, F2P, <b>không Gacha nhân vật</b>.</li>
+      <li><b>Nhà phát triển:</b> Pawprint Studio / Pawprint Interactive Entertainment (hợp tác FunPlus).</li>
+      <li><b>Ngày ra mắt:</b> PC/PS5/Xbox: <b>16/09/2026, 10:00 UTC+8</b>. Mobile (iOS/Android): 23/09/2026.</li>
+      <li><b>Nền tảng:</b> Steam, Epic Games Store, Microsoft Store, PS5, Xbox Series X|S, iOS, Android — Cross-play + Cross-progression đầy đủ.</li>
+      <li><b>Server VN nên chọn:</b> Aniimo-Apac (ping thấp nhất).</li>
+      <li><b>Bối cảnh:</b> Lục địa Idyll (hành tinh Astra). Người chơi là Observer thuộc Học viện Polaris, thuần hóa Aniimo và ngăn thế lực hắc ám.</li>
+    </ul>
+  </div>
+
+  <h2>Cấu hình PC</h2>
+  <div class="tbl-wrap"><table>
+    <tr><th></th><th>Tối thiểu</th><th>Khuyến nghị</th></tr>
+    <tr><td>CPU</td><td>i7-9700 / Ryzen 5 3600X</td><td>i7-12700F / Ryzen 7 7700X</td></tr>
+    <tr><td>RAM</td><td>12 GB</td><td>16 GB</td></tr>
+    <tr><td>GPU</td><td>GTX 1060 / RX 6600</td><td>RTX 3070 8GB / RX 6800</td></tr>
+    <tr><td>Ổ cứng</td><td>45 GB SSD</td><td>45 GB SSD</td></tr>
+  </table></div>
+
+  <h2>Hai cơ chế lõi</h2>
+  <div class="card">
+    <p><b>Command Mode</b> — Aniimo tự động chiến đấu cạnh người chơi, bạn đứng ngoài hỗ trợ/đặt bẫy.<br>
+    <b>Twining Mode ("Be One, Be All")</b> — hóa thân trực tiếp thành Aniimo, có <b>I-frame 0.4s</b> khi né, dùng Trait di chuyển đặc hữu (Tunneling / Gliding / Surfing).</p>
+    <p><b>Break System:</b> đánh gãy thanh Break (giáp) của mục tiêu → choáng cứng 2.5–3s + nhận thêm 30% sát thương. Chỉ nên ném Aniipod khi máu &lt;20% <i>và</i> Break đã gãy.</p>
+  </div>
+
+  <h2>Cross-progression</h2>
+  <div class="card">
+    <p>Liên kết tài khoản chỉ thực hiện <b>1 lần duy nhất</b> ở lần mở game đầu tiên trên console — nhập đúng email tài khoản cũ vào popup liên kết. Bỏ qua bước này sẽ tạo tài khoản mới <b>vĩnh viễn không thể</b> liên kết lại. Không hỗ trợ cross-server.</p>
+  </div>
+</section>
+
+<section id="aniidex">
+  <h2>Bách khoa Aniimo (Aniidex)</h2>
+  <div class="filters">
+    <input type="text" id="search" placeholder="Tìm tên Aniimo...">
+  </div>
+  <div class="filters" id="elemFilters"></div>
+  <div class="filters" id="tierFilters"></div>
+  <div class="count" id="resultCount"></div>
+  <div class="grid" id="dexGrid"></div>
+</section>
+
+<section id="tier-list">
+  <h2>Tier List PvE</h2>
+  <div class="card">
+    <p><span class="pill t0">T0 Meta</span> Irisalis, Malevsera, Grizbo, Fulmintis, Fenmane, Helion, Lunara, Stellarys, Rookey, Somniwing, Besauce</p>
+    <p><span class="pill t05">T0.5</span> Pawney, Thornblade, Scorchhowl, Helgon, Inferlupa, Minespine, Panpanta, Dazmand, Blazen, Tromber, Fragrancier, Melloblum, Glameep, Witchin, Glacy, Gracewing</p>
+    <p><span class="pill t1">T1</span> Infergon, Gachapus, Waleetle, Ignitis, Cornet, Geoclaw, Magmarex, Tubster, Luminelle, Bailite, Piopiota, Turbo, Eklue, Coraliz, Erlath, Leafy, Bubbeep, Flutternym</p>
+    <p><span class="pill t2">T2</span> Malangel, Sherro, Irisal, Glynsera, Sheldon, Fenrier, Popapus, Cubbo, Wavwal, Tuckin, Pomawk, Shrubclaw, Helmwhelp, Geodeback, Lavazar, Cheekie, Popota, Dreaple, Bouldus, Veilfloat, Flamerion, Reefish</p>
+    <p><span class="pill t25">T2.5</span> Flameruff, Baleetle, Fentuft, Budsquire, Wisptis, Hummin, Pomegg, Budclaw, Bolty, Chirpi, Nimbi, Eko, Pranky, Fahloo</p>
+    <p><span class="pill t3">T3</span> Celestis, Iris, Shelly, Bonesky, Emberpup, Jawling, Pebbling, Susuta, Bulbly, Helmut, Cozite, Dewy, Sparki, Skippy</p>
+  </div>
+  <h2>Bảng riêng: 7 Healer</h2>
+  <div class="card"><p><b>S:</b> Gracewing, Glameep, Glacy · <b>A:</b> Flutternym, Bubbeep · <b>B:</b> Skippy, Pranky</p></div>
+  <h2>Bảng riêng: 16 DPS</h2>
+  <div class="card"><p><b>S:</b> Stellarys, Malevsera, Grizbo, Fenmane, Fulmintis · <b>A:</b> Scorchhowl, Infergon, Cornet, Thornblade, Ignitis, Gachapus, Helion, Fennelun · <b>B:</b> Sherro, Glynsera, Irisal</p></div>
+</section>
+
+<section id="doi-hinh">
+  <h2>Bảng khắc chế nguyên tố</h2>
+  <div class="tbl-wrap"><table>
+    <tr><th>Hệ</th><th>Khắc</th><th>Bị khắc</th></tr>
+    <tr><td>Lửa</td><td>Cỏ, Băng</td><td>Nước, Tối</td></tr>
+    <tr><td>Nước</td><td>Lửa, Đất</td><td>Cỏ, Điện, Băng</td></tr>
+    <tr><td>Cỏ</td><td>Nước, Đất</td><td>Lửa, Gió, Tối</td></tr>
+    <tr><td>Điện</td><td>Nước, Gió</td><td>Đất, Băng</td></tr>
+    <tr><td>Đất</td><td>Điện, Băng</td><td>Nước, Cỏ</td></tr>
+    <tr><td>Gió</td><td>Cỏ, Tối</td><td>Điện, Sáng</td></tr>
+    <tr><td>Tối</td><td>Lửa, Cỏ, Sáng</td><td>Gió, Sáng</td></tr>
+    <tr><td>Băng</td><td>Nước, Điện</td><td>Lửa, Đất</td></tr>
+    <tr><td>Ánh Sáng</td><td>Gió, Tối</td><td>Tối</td></tr>
+  </table></div>
+  <p style="font-size:.8rem;color:var(--muted)">Hệ khắc chế: x1.6 sát thương · Hệ bị khắc: x0.625 · Trung lập: x1</p>
+
+  <h2>Đội hình PvP Meta (Holy Trinity)</h2>
+  <div class="card"><p><b>Sát thủ:</b> Stellarys / Thornblade &nbsp;·&nbsp; <b>Cleanse bắt buộc:</b> Gracewing &nbsp;·&nbsp; <b>Breaker/CC:</b> Glancer / Fulmintis</p></div>
+
+  <h2>Đội hình PvE nổi bật</h2>
+  <div class="card">
+    <p><b>Electric Premium:</b> Blazen → Fulmintis → Luminelle → Turbo</p>
+    <p><b>Dark One-Shot (Boss Killer):</b> Dreaple + Fragrancier → Inferlupa → Pawney</p>
+    <p><b>Full Lightning Burst:</b> Fenmane → Luminelle → Dazmand → Glacy</p>
+    <p><b>Grass Crit Sanctuary:</b> Gracewing → Thornblade → Melloblum → Tuckin</p>
+  </div>
+</section>
+
+<section id="vat-pham">
+  <h2>⚠️ Rune & Gacha đã bị gỡ bỏ</h2>
+  <div class="card" style="border-color:var(--warn)">
+    <p>Theo thư thông báo 03/09/2026: gỡ bỏ Gacha bắt Aniimo Huyền thoại (thay bằng thu thập Legendary Token → tự chế Legendary Aniipod) và gỡ bỏ <b>toàn bộ hệ thống Rune</b>. Hệ thống thay thế (nếu có, có thể là "Capability Awakening") <b>chưa được xác nhận chính thức</b>.</p>
+  </div>
+
+  <h2>Aniipod (11 loại)</h2>
+  <div class="card"><p>Aniipod, for Teaching, Hyper, Mega, Pro, Trace (auto-lock), <b>Ultra</b> (mạnh nhất thường), Legendary Aniipod, Nicole's, <b>Sparkling Cube</b> (đảm bảo Perfect Potential), Tumbler (bắt cả đàn).</p></div>
+
+  <h2>Trứng (111 quả, 4 bậc)</h2>
+  <div class="card"><p>Prismatic (36) · Legendary (43) · Epic (26) · Rare (6). Gồm Zone Egg, Species/Elite Egg, Prismana Egg, Sparkling Egg, Perfect Egg (theo loài hoặc theo vai trò).</p></div>
+
+  <h2>Hệ thống Form đặc biệt</h2>
+  <div class="tbl-wrap"><table>
+    <tr><th>Form</th><th>Định nghĩa</th><th>Số lượng</th></tr>
+    <tr><td>Regional</td><td>Tiến hóa tại đúng vùng địa lý</td><td>78 (Highland 49, Mountain Woods 27, Mudflat 2)</td></tr>
+    <tr><td>Weather</td><td>Tiến hóa đúng thời tiết/thời điểm</td><td>19</td></tr>
+    <tr><td>Prismana</td><td>Hiếm cầu vồng, chỉ khác ngoại hình</td><td>20</td></tr>
+    <tr><td>Umbrabow</td><td>Đối trọng bóng tối của Prismana</td><td>12</td></tr>
+    <tr><td>Sparkling</td><td>Lớp "shiny" cộng dồn lên form khác</td><td>69</td></tr>
+    <tr><td>Alpha</td><td>Boss khổng lồ ngoài thế giới mở</td><td>19 điểm (Breezy Plains)</td></tr>
+    <tr><td>Omega</td><td>Boss khổng lồ loại 2, cơ chế khác Alpha</td><td>4 điểm</td></tr>
+  </table></div>
+  <div class="card"><p>💡 Mẹo: dùng <b>Sparkling Cube</b> lên Prismana miễn phí (từ Prismana Promise) → có ngay bản vừa Prismana vừa Sparkling, không cần roll.</p></div>
+</section>
+
+<section id="nguoi-moi">
+  <h2>So sánh 2 Starter</h2>
+  <div class="tbl-wrap"><table>
+    <tr><th></th><th>Lunara (Moon Fox)</th><th>Helion (Sun Lion)</th></tr>
+    <tr><td>Hệ/Vai trò</td><td>Ánh Sáng · DPS tầm xa</td><td>Ánh Sáng · DPS cận chiến</td></tr>
+    <tr><td>Chỉ số</td><td colspan="2">Giống hệt nhau: HP 90 / ATK 116 / P.DEF 65 / M.DEF 65 / BREAK 85 / REGEN 83 (BST 504)</td></tr>
+    <tr><td>Ưu</td><td>An toàn, đứng xa, giảm kháng địch, tự sustain</td><td>Dồn dập, gom địch, burst mạnh</td></tr>
+    <tr><td>Nhược</td><td>Cần setup, ít burst</td><td>Cận chiến cần né đòn chuẩn</td></tr>
+  </table></div>
+  <p style="font-size:.8rem;color:var(--muted)">Quyết định gần như vĩnh viễn — hiện chưa có cách nào khác để có 2 Starter này.</p>
+
+  <h2>10 việc nên làm đầu tiên</h2>
+  <div class="card"><ul>
+    <li>Đẩy Wayfarer Level qua cốt truyện chính (mở Talent, tăng trần cấp Aniimo)</li>
+    <li>Bắt mọi loài mới trên đường đi thay vì cày trùng loài</li>
+    <li>Gom đủ 30 Lumin Amber (nửa phí mở Nurture)</li>
+    <li>Mở khóa Nurture, dùng miễn phí mỗi ngày 04:00</li>
+    <li>Tiêu Prime Energy trước khi chạm trần 300 (hồi 1đ/6 phút)</li>
+    <li>Mở Homeland ngay khi đạt Wayfarer Lv20</li>
+    <li>Nâng RV lên cấp 2 sớm (bắt đầu tự động hóa nhân công)</li>
+    <li>Đẩy Holo Battle theo sức mạnh đội hình</li>
+    <li>Nhận hết phần thưởng reset hàng ngày trước khi thoát game</li>
+    <li>Giữ dành Sparkling Cube / Aniipod Ultra / Perfect Egg cho Aniimo thực sự đáng giá</li>
+  </ul></div>
+
+  <h2>6 Prismana miễn phí (chọn lúc Junior Wayfarer)</h2>
+  <div class="tbl-wrap"><table>
+    <tr><th>Prismana</th><th>Hệ/Vai trò</th><th>Điểm mạnh</th></tr>
+    <tr><td>Witchin</td><td>Tối · Healer</td><td>BST cao nhất (530), healer duy nhất trong 6 lựa chọn</td></tr>
+    <tr><td>Grizbo</td><td>Đất · DPS</td><td>Đòn đánh mạnh nhất nhóm (Rock Smash 227)</td></tr>
+    <tr><td>Pawney</td><td>Tối · DPS</td><td>ATK cao nhất nhóm (128)</td></tr>
+    <tr><td>Thornblade</td><td>Cỏ · DPS</td><td>Sword Dance cộng dồn, thưởng lối chơi kiên trì</td></tr>
+    <tr><td>Turbo</td><td>Gió · Support</td><td>Skill miễn phí mỗi 25s, 5 biến thể form</td></tr>
+    <tr><td>Scorchhowl</td><td>Lửa · DPS</td><td>6 biến thể form, bỏng cộng dồn</td></tr>
+  </table></div>
+
+  <h2>Homeland — 13 công việc &amp; bậc RV</h2>
+  <div class="card">
+    <p>9 job hệ nguyên tố + 4 job chung (Carry, Artisanship, Leisure, Perfumery). Nguyên tắc: phủ đủ job cần trước, rồi mới nâng job yếu nhất.</p>
+    <p><b>Đội khởi đầu tốt (RV2, 8 slot):</b> Turbo, Shrubclaw, Fragrancier, Thornblade, Stellarys, Glacy, Emberpup (tạm), Pranky (tạm).</p>
+  </div>
+</section>
+
+<section id="roadmap">
+  <h2>Roadmap 30 ngày</h2>
+  <div class="card">
+    <p><b>Tuần 1 (1-7):</b> Tutorial, chọn Starter, bắt Emberpup, mở 6 tháp dịch chuyển, đặt móng Homeland, bắt Gracewing, lên Lv25.</p>
+    <p><b>Tuần 2 (8-14):</b> Mở vùng Băng/Lửa, Co-op săn Boss, bắt Thornblade &amp; Coraliz, thử 3v3 Egg Heist, chế Aniipod Ultra.</p>
+    <p><b>Tuần 3 (15-21):</b> Lên Lv40, kích hoạt Prismana Promise, tiến hóa tối thượng đội hình, hoàn thành Mobile Base.</p>
+    <p><b>Tuần 4 (22-30):</b> Săn Alpha Stellarys, dùng Inheritance chuyển tài nguyên, leo Top PvP &amp; Diamond Egg Heist.</p>
+  </div>
+
+  <h2>Cày cấp thần tốc 3 ngày đầu</h2>
+  <div class="card"><ul>
+    <li><b>Hyper-Carry:</b> dồn 85% EXP Gems vào 1 DPS chủ lực lên Lv30-35 ngay ngày 1-2</li>
+    <li>Bắt loài mới lần đầu = x3-x5 EXP (dùng bẫy Tumbler gom cả đàn)</li>
+    <li>Bám Training Program, đẩy Holo-Battle Sim tầng 15-20 (không tốn Stamina)</li>
+    <li>Săn 4 Alpha Boss cấp thấp: Roobeak (Lv12), Aquapup (Lv18), Thornblade (Lv25), Grizbo (Lv32)</li>
+    <li>Không để Stamina chạm trần 180 (hồi 1đ/6 phút)</li>
+  </ul></div>
+
+  <h2>3 kỹ thuật PvP sống còn</h2>
+  <div class="card"><ol>
+    <li><b>I-frame nuốt chiêu cuối:</b> bấm Twining/Dash đúng lúc để dùng 0.4s bất tử</li>
+    <li><b>Đếm Cooldown Dash địch</b> (4-5s) rồi tung khống chế ngay khi chúng vừa lướt xong</li>
+    <li><b>Animation Canceling:</b> bấm skill Command Mode → Twine ngay → đòn thường bồi liền</li>
+  </ol></div>
+
+  <h2>5 sai lầm cần tránh</h2>
+  <div class="card"><ol>
+    <li>Nâng sao bừa bãi quái Common</li>
+    <li>Bỏ quên Healer (Gracewing) — không qua nổi ải 35+</li>
+    <li>Bỏ bê Homeland — thiếu bóng ném &amp; thuốc hồi ở Endgame</li>
+    <li>Chọn Prismana theo màu sắc thay vì bổ trợ hệ</li>
+    <li>Đứng yên bấm chiêu trong PvP — phải di chuyển liên tục</li>
+  </ol></div>
+</section>
+
+<section id="su-kien">
+  <h2>Lịch sự kiện 6 tuần đầu</h2>
+  <div class="card">
+    <p><b>Tuần 1-2 (16-29/09):</b> Mở cụm Apac, x2 EXP tân thủ, 23/09 mở Mobile.</p>
+    <p><b>Tuần 3-4 (30/09-14/10):</b> Season 1 Egg Heist, x2 tỉ lệ Sparkling cuối tuần, mở Sanctum Puzzles.</p>
+    <p><b>Tuần 5-6 (15-28/10):</b> Prismana Flow cực hạn, mở chuỗi tiến hóa Inferlupa.</p>
+    <p><b>Sự kiện dài:</b> Tracing the Trail (20/09–09/12), Legendary Journey: Irisalis (25/09–09/12).</p>
+    <p><b>Vein Abundance (tăng tỉ lệ Prismana):</b> 18-20/09 Forest of Falling Stars → 21-27/09 Glynsera → 28/09-04/10 Melloblum → 05-11/10 Waleetle → 12-18/10 Inferlupa → 19-25/10 Carnival (cả 4).</p>
+  </div>
+
+  <h2>Quà Pre-Registration (30 triệu đăng ký)</h2>
+  <div class="card"><p>5M: 5x Aniipod T1 + 5.000 Vàng · 15M: 10x Experience Gems · 25M: 3x Prismana Shard + danh hiệu · 30M: Trang phục Sunlit Meadow Outfit vĩnh viễn.</p></div>
+
+  <h2>Mã Redeem</h2>
+  <div class="card"><p>Tính đến 15/09/2026: <b>chưa có mã nào</b> được công bố chính thức. Cẩn thận với các trang liệt kê "mã đang hoạt động" — đều là bịa đặt cho tới khi Pawprint Studio công bố qua kênh chính thức.</p></div>
+</section>
+
+<footer>
+  <p><b>Nguồn tổng hợp:</b> gói tài liệu cá nhân (video ZakkuVerse + aniimotools.dev), wiki cộng đồng aniimoguide.com, và wiki chính thức wiki.aniimo.com (Pawprint Interactive Entertainment). Trang này do người hâm mộ tự làm, không thuộc Pawprint Studio.</p>
+  <p>Cập nhật lần cuối: 15/09/2026. Dữ liệu trước ngày ra mắt có thể thay đổi khi game chính thức phát hành 16/09/2026 — sẽ cập nhật liên tục sau đó.</p>
+</footer>
+
+<script>
+const DATA = [{"num": "001", "name": "Emberpup", "elem": "Lửa", "role": "DPS", "bst": 371, "tier": "T3", "desc": "Sinh vật hướng dẫn đầu tiên. Tiến hóa thành Flameruff và Inferlupa. Đốt cháy dây leo mở rương bí mật, sát thương duy trì ổn định.", "loc": "📍 Vị trí: Đồng cỏ quanh Học viện Polaris ⏰ Đk/Ghi chú: Bắt theo cốt truyện đầu game"}, {"num": "002", "name": "Flameruff", "elem": "Lửa", "role": "DPS", "bst": 445, "tier": "T2.5", "desc": "", "loc": ""}, {"num": "003", "name": "Scorchhowl", "elem": "Lửa", "role": "DPS", "bst": 495, "tier": "T0.5", "desc": "", "loc": ""}, {"num": "004", "name": "Inferlupa", "elem": "Lửa/Tối", "role": "Break", "bst": 551, "tier": "T0.5", "desc": "Hình thái tối thượng của Emberpup. Phun lửa thiêu đốt toàn bộ đấu trường, biến cỏ thành biển lửa gây sát thương DoT khủng.", "loc": "📍 Vị trí: Tiến hóa từ Scorchhowl ⏰ Đk/Ghi chú: Cần Blaze Stone + Lv 36"}, {"num": "005", "name": "Celestis", "elem": "Bóng Tối", "role": "DPS", "bst": 412, "tier": "T3", "desc": "", "loc": ""}, {"num": "006", "name": "Stellarys", "elem": "Bóng Tối", "role": "DPS", "bst": 485, "tier": "T0", "desc": "Sát thủ dồn sát thương bùng nổ SSS. Chiêu bóng tối khóa mục tiêu xuyên I-frame lướt né, tiễn đối thủ lên bảng trong 1 combo.", "loc": "📍 Vị trí: Phế tích Forest of Falling Stars ⏰ Đk/Ghi chú: Ban đêm khi có sao băng (Alpha Boss)"}, {"num": "007", "name": "Chirpi", "elem": "Gió", "role": "Support", "bst": 443, "tier": "T2.5", "desc": "", "loc": ""}, {"num": "008", "name": "Tromber", "elem": "Gió", "role": "Support", "bst": 522, "tier": "T0.5", "desc": "", "loc": ""}, {"num": "009", "name": "Cornet", "elem": "Gió", "role": "DPS", "bst": 489, "tier": "T1", "desc": "", "loc": ""}, {"num": "010", "name": "Tubster", "elem": "Gió", "role": "Break", "bst": 535, "tier": "T1", "desc": "", "loc": ""}, {"num": "011", "name": "Iris", "elem": "Thảo Mộc", "role": "DPS", "bst": 397, "tier": "T3", "desc": "", "loc": ""}, {"num": "012", "name": "Irisal", "elem": "Thảo Mộc", "role": "DPS", "bst": 504, "tier": "T2", "desc": "", "loc": ""}, {"num": "013", "name": "Irisalis", "elem": "Thảo Mộc", "role": "DPS", "bst": 550, "tier": "T0", "desc": "T0 Support toàn diện: Tạo vòng hào quang giảm 30% sát thương nhận vào cho toàn đội và khuếch đại sát thương nguyên tố.", "loc": "📍 Vị trí: Đỉnh đền cổ Sunlit Spire ⏰ Đk/Ghi chú: Trời nắng gắt, giữa trưa"}, {"num": "014", "name": "Skippy", "elem": "Nước", "role": "Heal", "bst": 332, "tier": "T3", "desc": "", "loc": ""}, {"num": "015", "name": "Pranky", "elem": "Nước", "role": "Heal", "bst": 468, "tier": "T2.5", "desc": "Tạo phân thân đánh lừa mục tiêu, khiêu khích đối phương tấn công bóng ma để đồng đội phía sau thoải mái xả chiêu.", "loc": "📍 Vị trí: Khu phế tích cổ Forgotten Ruins ⏰ Đk/Ghi chú: Ban đêm"}, {"num": "016", "name": "Glacy", "elem": "Nước/Băng", "role": "Heal", "bst": 520, "tier": "T0.5", "desc": "Dạng Prismana: Đóng băng diện rộng, dựng tường băng chắn đường trong Egg Heist. Khắc chế triệt để các tướng lao vào.", "loc": "📍 Vị trí: Hang băng tuyết Frostbite Cavern ⏰ Đk/Ghi chú: Đổi vé Lv 40 hoặc bắt bão tuyết"}, {"num": "017", "name": "Leafy", "elem": "Cỏ/Nước", "role": "Regen", "bst": 530, "tier": "T1", "desc": "", "loc": ""}, {"num": "018", "name": "Nimbi", "elem": "Gió", "role": "Support", "bst": 442, "tier": "T2.5", "desc": "", "loc": ""}, {"num": "019", "name": "Turbo", "elem": "Gió", "role": "Support", "bst": 520, "tier": "T1", "desc": "", "loc": ""}, {"num": "020", "name": "Dreaple", "elem": "Bóng Tối", "role": "Support", "bst": 530, "tier": "T2", "desc": "", "loc": ""}, {"num": "021", "name": "Hummin", "elem": "Thảo Mộc", "role": "Break", "bst": 458, "tier": "T2.5", "desc": "", "loc": ""}, {"num": "022", "name": "Witchin", "elem": "Tối/Cỏ", "role": "Regen", "bst": 530, "tier": "T0.5", "desc": "", "loc": ""}, {"num": "023", "name": "Tuckin", "elem": "Thảo Mộc", "role": "Break", "bst": 550, "tier": "T2", "desc": "", "loc": ""}, {"num": "024", "name": "Budclaw", "elem": "Đất/Cỏ", "role": "Break", "bst": 454, "tier": "T2.5", "desc": "", "loc": ""}, {"num": "025", "name": "Shrubclaw", "elem": "Đất/Cỏ", "role": "Break", "bst": 535, "tier": "T2", "desc": "", "loc": ""}, {"num": "026", "name": "Geoclaw", "elem": "Băng", "role": "Break", "bst": 550, "tier": "T1", "desc": "", "loc": ""}, {"num": "027", "name": "Sparki", "elem": "Lửa", "role": "Regen", "bst": 426, "tier": "T3", "desc": "", "loc": ""}, {"num": "028", "name": "Flamerion", "elem": "Lửa", "role": "Regen", "bst": 502, "tier": "T2", "desc": "", "loc": ""}, {"num": "029", "name": "Flutternym", "elem": "Gió", "role": "Heal", "bst": 437, "tier": "T1", "desc": "", "loc": ""}, {"num": "030", "name": "Gracewing", "elem": "Gió", "role": "Heal", "bst": 515, "tier": "T0.5", "desc": "Healer quốc dân số 1: Hồi máu toàn đội, thanh tẩy mọi hiệu ứng khống chế, tạo khiên chắn và tăng tốc chạy cực lớn khi Twine.", "loc": "📍 Vị trí: Sea of Flowers & Mountain Woods ⏰ Đk/Ghi chú: Ban đêm hoặc sương mù dày"}, {"num": "031", "name": "Somniwing", "elem": "Gió/Cỏ", "role": "Regen", "bst": 528, "tier": "T0", "desc": "Rải phấn hoa gây ngủ diện rộng trong PvP, phá vỡ nhịp di chuyển của đối phương và đánh sập thanh Break từ trên không.", "loc": "📍 Vị trí: Thung lũng sương mù Mistveil ⏰ Đk/Ghi chú: Ban đêm hoặc sương mù dày"}, {"num": "032", "name": "Eko", "elem": "Gió", "role": "Support", "bst": 440, "tier": "T2.5", "desc": "", "loc": ""}, {"num": "033", "name": "Eklue", "elem": "Gió", "role": "Support", "bst": 518, "tier": "T1", "desc": "", "loc": ""}, {"num": "034", "name": "Budsquire", "elem": "Thảo Mộc", "role": "DPS", "bst": 424, "tier": "T2.5", "desc": "", "loc": ""}, {"num": "035", "name": "Thornblade", "elem": "Thảo Mộc", "role": "DPS", "bst": 499, "tier": "T0.5", "desc": "Cơ động số 1 hệ Cỏ: Phóng kiếm khí tầm xa, lướt né mượt mà, khắc chế cứng hệ Đất/Nước và cực mạnh trong thả diều (kiting).", "loc": "📍 Vị trí: Thảo nguyên rìa Sea of Flowers ⏰ Đk/Ghi chú: Ban ngày, trời quang mây"}, {"num": "036", "name": "Melloblum", "elem": "Thảo Mộc", "role": "Support", "bst": 512, "tier": "T0.5", "desc": "", "loc": ""}, {"num": "037", "name": "Pomegg", "elem": "Thảo Mộc", "role": "Break", "bst": 455, "tier": "T2.5", "desc": "", "loc": ""}, {"num": "038", "name": "Dazmand", "elem": "Điện", "role": "Support", "bst": 532, "tier": "T0.5", "desc": "", "loc": ""}, {"num": "039", "name": "Pomawk", "elem": "Thảo Mộc", "role": "Break", "bst": 535, "tier": "T2", "desc": "", "loc": ""}, {"num": "040", "name": "Dewy", "elem": "Bóng Tối", "role": "Support", "bst": 437, "tier": "T3", "desc": "", "loc": ""}, {"num": "041", "name": "Fragrancier", "elem": "Bóng Tối", "role": "Support", "bst": 514, "tier": "T0.5", "desc": "", "loc": ""}, {"num": "042", "name": "Wisptis", "elem": "Bóng Tối", "role": "DPS", "bst": 419, "tier": "T2.5", "desc": "", "loc": ""}, {"num": "043", "name": "Ignitis", "elem": "Bóng Tối", "role": "DPS", "bst": 492, "tier": "T1", "desc": "", "loc": ""}, {"num": "044", "name": "Fulmintis", "elem": "Điện", "role": "DPS", "bst": 520, "tier": "T0", "desc": "Dạng Prismana nhận miễn phí ở Lv 40. Phóng sét chuỗi nhảy qua 4 mục tiêu, ngắt quãng 100% động tác biến thân Twining của địch.", "loc": "📍 Vị trí: Sự kiện Prismana Promise (Lv 40) ⏰ Đk/Ghi chú: Chọn vĩnh viễn"}, {"num": "045", "name": "Bonesky", "elem": "Băng", "role": "DPS", "bst": 377, "tier": "T3", "desc": "", "loc": ""}, {"num": "046", "name": "Fenrier", "elem": "Băng", "role": "DPS", "bst": 453, "tier": "T2", "desc": "", "loc": ""}, {"num": "047", "name": "Glynsera", "elem": "Băng", "role": "DPS", "bst": 503, "tier": "T2", "desc": "", "loc": ""}, {"num": "048", "name": "Bolty", "elem": "Điện", "role": "Break", "bst": 450, "tier": "T2.5", "desc": "", "loc": ""}, {"num": "049", "name": "Blazen", "elem": "Điện", "role": "Break", "bst": 530, "tier": "T0.5", "desc": "Đấu sĩ cận chiến hỏa lực mạnh. Cú húc bộc phá đập tan các tảng băng cổ đại và thổi bay thanh giáp của quái phòng thủ.", "loc": "📍 Vị trí: Rừng Blitzwood ⏰ Đk/Ghi chú: Xuất hiện nhiều dạng Alpha Boss"}, {"num": "050", "name": "Susuta", "elem": "Nước", "role": "Break", "bst": 411, "tier": "T3", "desc": "Quà tặng ấp trứng từ web pre-reg. Tăng 15% tốc độ nhặt đồ và tự động phát hiện rương kho báu ẩn trong bán kính 50m.", "loc": "📍 Vị trí: Ấp từ Susuta Egg ⏰ Đk/Ghi chú: Quà tặng đặc quyền"}, {"num": "051", "name": "Popota", "elem": "Nước", "role": "Break", "bst": 471, "tier": "T2", "desc": "", "loc": ""}, {"num": "052", "name": "Piopiota", "elem": "Nước", "role": "Support", "bst": 532, "tier": "T1", "desc": "", "loc": ""}, {"num": "053", "name": "Panpanta", "elem": "Nước", "role": "Break", "bst": 545, "tier": "T0.5", "desc": "", "loc": ""}, {"num": "054", "name": "Shelly", "elem": "Nước", "role": "DPS", "bst": 382, "tier": "T3", "desc": "", "loc": ""}, {"num": "055", "name": "Sheldon", "elem": "Nước", "role": "DPS", "bst": 458, "tier": "T2", "desc": "", "loc": ""}, {"num": "056", "name": "Sherro", "elem": "Nước", "role": "DPS", "bst": 509, "tier": "T2", "desc": "", "loc": ""}, {"num": "057", "name": "Baleetle", "elem": "Đất", "role": "DPS", "bst": 442, "tier": "T2.5", "desc": "", "loc": ""}, {"num": "058", "name": "Waleetle", "elem": "Đất", "role": "DPS", "bst": 520, "tier": "T1", "desc": "", "loc": ""}, {"num": "059", "name": "Bouldus", "elem": "Đất", "role": "Support", "bst": 521, "tier": "T2", "desc": "", "loc": ""}, {"num": "060", "name": "Fentuft", "elem": "Điện", "role": "DPS", "bst": 429, "tier": "T2.5", "desc": "", "loc": ""}, {"num": "061", "name": "Fenmane", "elem": "Điện", "role": "DPS", "bst": 505, "tier": "T0", "desc": "Tốc độ di chuyển và tấn công cao nhất hệ Lôi. Lướt xuyên qua người đối thủ để lại vệt sét gây tê liệt liên hoàn.", "loc": "📍 Vị trí: Đỉnh cao nguyên lôi điện Thunder Ridge ⏰ Đk/Ghi chú: Thời tiết sấm sét bão bùng"}, {"num": "062", "name": "Helmut", "elem": "Bóng Tối", "role": "Break", "bst": 339, "tier": "T3", "desc": "", "loc": ""}, {"num": "063", "name": "Pawney", "elem": "Bóng Tối", "role": "DPS", "bst": 512, "tier": "T0.5", "desc": "", "loc": ""}, {"num": "064", "name": "Rookey", "elem": "Bóng Tối", "role": "Break", "bst": 548, "tier": "T0", "desc": "Cỗ máy phá giáp số 1: Cú đấm địa chấn làm vỡ 50% thanh Break của mục tiêu ngay trong chiêu đầu tiên. Miễn nhiễm choáng.", "loc": "📍 Vị trí: Hẻm núi đá nứt Stone Gorge ⏰ Đk/Ghi chú: Quanh năm, vùng núi đá"}, {"num": "065", "name": "Jawling", "elem": "Gió", "role": "Break", "bst": 416, "tier": "T3", "desc": "", "loc": ""}, {"num": "066", "name": "Helmwhelp", "elem": "Gió", "role": "Break", "bst": 500, "tier": "T2", "desc": "", "loc": ""}, {"num": "067", "name": "Helgon", "elem": "Gió", "role": "Break", "bst": 555, "tier": "T0.5", "desc": "", "loc": ""}, {"num": "068", "name": "Infergon", "elem": "Lửa", "role": "DPS", "bst": 536, "tier": "T1", "desc": "", "loc": ""}, {"num": "069", "name": "Cubbo", "elem": "Đất", "role": "DPS", "bst": 445, "tier": "T2", "desc": "", "loc": ""}, {"num": "070", "name": "Grizbo", "elem": "Đất", "role": "DPS", "bst": 524, "tier": "T0", "desc": "Dẫm đất gây choáng diện rộng, tạo sóng chấn động hất văng kẻ địch và phá vỡ thế trận phòng thủ trong 3v3 Egg Heist.", "loc": "📍 Vị trí: Rừng rậm nguyên sinh Pinecrest ⏰ Đk/Ghi chú: Ban ngày"}, {"num": "071", "name": "Pebbling", "elem": "Đất", "role": "Break", "bst": 412, "tier": "T3", "desc": "", "loc": ""}, {"num": "072", "name": "Lavazar", "elem": "Lửa/Đất", "role": "Break", "bst": 494, "tier": "T2", "desc": "", "loc": ""}, {"num": "073", "name": "Magmarex", "elem": "Lửa/Đất", "role": "Break", "bst": 549, "tier": "T1", "desc": "Alpha Boss khổng lồ: Cú giẫm phun trào dung nham nung chảy mọi lá chắn. Sát thương đơn mục tiêu thuộc hàng top đầu.", "loc": "📍 Vị trí: Miệng núi lửa Cinder Peak ⏰ Đk/Ghi chú: Vùng dung nham nóng"}, {"num": "074", "name": "Geodeback", "elem": "Đất", "role": "Break", "bst": 495, "tier": "T2", "desc": "", "loc": ""}, {"num": "075", "name": "Minespine", "elem": "Đất", "role": "Break", "bst": 550, "tier": "T0.5", "desc": "", "loc": ""}, {"num": "076", "name": "Cozite", "elem": "Đất", "role": "Support", "bst": 438, "tier": "T3", "desc": "", "loc": ""}, {"num": "077", "name": "Bailite", "elem": "Đất", "role": "Support", "bst": 536, "tier": "T1", "desc": "", "loc": ""}, {"num": "078", "name": "Bulbly", "elem": "Điện", "role": "Support", "bst": 404, "tier": "T3", "desc": "", "loc": ""}, {"num": "079", "name": "Veilfloat", "elem": "Điện", "role": "Support", "bst": 486, "tier": "T2", "desc": "Tàng hình khi di chuyển dưới nước hoặc sương mù. Phun bọt nước ru ngủ kẻ địch đi lẻ, cực kỳ khó chịu trong PvP.", "loc": "📍 Vị trí: Đầm nước sâu hồ Sapphire ⏰ Đk/Ghi chú: Trời mưa hoặc đêm"}, {"num": "080", "name": "Luminelle", "elem": "Điện", "role": "Support", "bst": 540, "tier": "T1", "desc": "", "loc": ""}, {"num": "081", "name": "Fahloo", "elem": "Nước", "role": "Regen", "bst": 459, "tier": "T2.5", "desc": "", "loc": ""}, {"num": "082", "name": "Erlath", "elem": "Nước", "role": "Regen", "bst": 540, "tier": "T1", "desc": "", "loc": ""}, {"num": "083", "name": "Besauce", "elem": "Điện", "role": "Regen", "bst": 521, "tier": "T0", "desc": "Đấu sĩ hút máu siêu trâu bò: Vừa đánh vừa hồi phục theo % máu tối đa, biến thành bao cát không thể bị hạ gục trong PvP.", "loc": "📍 Vị trí: Đầm lầy đáy sâu Mudmire ⏰ Đk/Ghi chú: Thời tiết mưa bão"}, {"num": "084", "name": "Reefish", "elem": "Đất/Nước", "role": "Regen", "bst": 486, "tier": "T2", "desc": "", "loc": ""}, {"num": "085", "name": "Coraliz", "elem": "Đất/Nước", "role": "Regen", "bst": 572, "tier": "T1", "desc": "Tạo vũng nước làm chậm 50% tốc độ chạy của đối phương, kết hợp đòn đánh băng để đông cứng toàn bộ đội hình địch.", "loc": "📍 Vị trí: Bờ biển duyên hải Coral Coast ⏰ Đk/Ghi chú: Ban ngày khi triều xuống"}, {"num": "086", "name": "Cheekie", "elem": "Băng", "role": "Break", "bst": 488, "tier": "T2", "desc": "", "loc": ""}, {"num": "087", "name": "Wavwal", "elem": "Băng", "role": "Break", "bst": 575, "tier": "T2", "desc": "", "loc": ""}, {"num": "088", "name": "Bubbeep", "elem": "Cỏ/Nước", "role": "Heal", "bst": 467, "tier": "T1", "desc": "", "loc": ""}, {"num": "089", "name": "Glameep", "elem": "Cỏ/Nước", "role": "Heal", "bst": 550, "tier": "T0.5", "desc": "", "loc": ""}, {"num": "090", "name": "Popapus", "elem": "Nước", "role": "DPS", "bst": 450, "tier": "T2", "desc": "", "loc": ""}, {"num": "091", "name": "Gachapus", "elem": "Nước", "role": "DPS", "bst": 529, "tier": "T1", "desc": "", "loc": ""}, {"num": "092", "name": "Malangel", "elem": "Băng", "role": "DPS", "bst": 515, "tier": "T2", "desc": "", "loc": ""}, {"num": "093", "name": "Malevsera", "elem": "Băng", "role": "DPS", "bst": 525, "tier": "T0", "desc": "Bậc thầy nguyền rủa: Gắn độc ăn mòn rút máu theo % máu tối đa và cấm đối phương sử dụng bình hồi máu trong 6 giây.", "loc": "📍 Vị trí: Vùng cấm địa Hắc Thủy ⏰ Đk/Ghi chú: Đêm trăng khuyết"}, {"num": "Starter", "name": "Lunara", "elem": "Ánh Sáng", "role": "DPS", "bst": 504, "tier": "T0", "desc": "1 trong 2 Starter chính thức. 504 BST, sở hữu chiêu ánh trăng tích tụ sát thương bùng nổ, linh hoạt giữa tầm xa và cận chiến.", "loc": "📍 Vị trí: Học viện Polaris (Khởi đầu) ⏰ Đk/Ghi chú: Đồng đều công thủ, dễ combo"}, {"num": "Starter", "name": "Fennelun (biến thể Lunara)", "elem": "Ánh Sáng", "role": "DPS", "bst": 504, "tier": "", "desc": "", "loc": ""}, {"num": "Starter", "name": "Helion", "elem": "Ánh Sáng", "role": "DPS", "bst": 504, "tier": "T0", "desc": "Starter thiên hướng tấn công. Tự kích hoạt buff cuồng bạo tăng 25% công bản thân, dọn ải và càn quét quái tân thủ nhanh nhất.", "loc": "📍 Vị trí: Học viện Polaris (Khởi đầu) ⏰ Đk/Ghi chú: 504 BST, cực mạnh đầu game"}, {"num": "Starter", "name": "Soleon (biến thể Helion)", "elem": "Ánh Sáng", "role": "DPS", "bst": 504, "tier": "", "desc": "", "loc": ""}, {"num": "S1", "name": "Lunara", "elem": "Ánh Sáng", "role": "DPS", "bst": 504, "tier": "T0", "desc": "Starter tầm xa, DPS phép, tự hồi máu nhẹ. Trait Lunar Power.", "loc": "Học viện Polaris"}, {"num": "S1", "name": "Helion", "elem": "Ánh Sáng", "role": "DPS", "bst": 504, "tier": "T0", "desc": "Starter cận chiến, DPS vật lý, gom địch. Trait Solar Grace.", "loc": "Học viện Polaris"}];
+
+function tierClass(t){
+  if(t==="T0") return "t0";
+  if(t==="T0.5") return "t05";
+  if(t==="T1") return "t1";
+  if(t==="T2") return "t2";
+  if(t==="T2.5") return "t25";
+  if(t==="T3") return "t3";
+  return "";
+}
+
+let activeElem = "all";
+let activeTier = "all";
+
+function uniq(arr){ return [...new Set(arr)]; }
+
+function renderFilters(){
+  const elems = uniq(DATA.map(d=>d.elem)).sort();
+  const elemBox = document.getElementById("elemFilters");
+  elemBox.innerHTML = '<span class="chip active" data-elem="all">Tất cả hệ</span>' + elems.map(e=>`<span class="chip" data-elem="${e}">${e}</span>`).join("");
+  elemBox.querySelectorAll(".chip").forEach(c=>c.addEventListener("click",()=>{
+    activeElem = c.dataset.elem;
+    elemBox.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));
+    c.classList.add("active");
+    render();
+  }));
+
+  const tiers = ["T0","T0.5","T1","T2","T2.5","T3"];
+  const tierBox = document.getElementById("tierFilters");
+  tierBox.innerHTML = '<span class="chip active" data-tier="all">Tất cả tier</span>' + tiers.map(t=>`<span class="chip" data-tier="${t}">${t}</span>`).join("");
+  tierBox.querySelectorAll(".chip").forEach(c=>c.addEventListener("click",()=>{
+    activeTier = c.dataset.tier;
+    tierBox.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));
+    c.classList.add("active");
+    render();
+  }));
+}
+
+function render(){
+  const q = document.getElementById("search").value.trim().toLowerCase();
+  const grid = document.getElementById("dexGrid");
+  const filtered = DATA.filter(d=>{
+    if(activeElem!=="all" && d.elem!==activeElem) return false;
+    if(activeTier!=="all" && d.tier!==activeTier) return false;
+    if(q && !d.name.toLowerCase().includes(q)) return false;
+    return true;
+  });
+  document.getElementById("resultCount").textContent = `${filtered.length} / ${DATA.length} Aniimo`;
+  grid.innerHTML = filtered.map(d=>`
+    <div class="mon">
+      <h4>#${d.num} ${d.name}</h4>
+      <div class="meta">
+        <span class="pill ${tierClass(d.tier)}">${d.tier||"?"}</span>
+        ${d.elem} · ${d.role} · BST ${d.bst}
+      </div>
+      ${d.desc? `<div class="desc">${d.desc}</div>`:""}
+      ${d.loc? `<div class="loc">${d.loc}</div>`:""}
+    </div>
+  `).join("");
+}
+
+document.getElementById("search").addEventListener("input", render);
+renderFilters();
+render();
+
+document.getElementById("tabs").addEventListener("click", (e)=>{
+  const btn = e.target.closest("button");
+  if(!btn) return;
+  document.querySelectorAll("nav.tabs button").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+  document.getElementById(btn.dataset.tab).classList.add("active");
+  window.scrollTo({top:0,behavior:"instant"});
+});
+</script>
+</body>
+</html>
