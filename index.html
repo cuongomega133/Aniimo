@@ -41,6 +41,18 @@
   .pill.t25{background:#38bdf8;color:#1a1a1a;} .pill.t3{background:#94a3b8;color:#1a1a1a;}
   .pill.melee{background:#e11d48;color:#fff;} .pill.ranged{background:#6366f1;color:#fff;}
   .pill.hybrid{background:#a855f7;color:#fff;} .pill.unknown{background:var(--card2);color:var(--muted);border:1px solid var(--border);}
+  .el-badge{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;margin-right:4px;vertical-align:middle;flex:none;}
+  .el-badge svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  .el-badge-mini{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;margin-right:4px;vertical-align:middle;opacity:.92;flex:none;}
+  .el-badge-mini svg{width:9px;height:9px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  .shape-dps{border-radius:7px 18px 7px 18px;}
+  .shape-break{border-radius:5px;clip-path:polygon(28% 0%,72% 0%,100% 28%,100% 72%,72% 100%,28% 100%,0% 72%,0% 28%);}
+  .shape-support{border-radius:50% 50% 50% 6px;}
+  .shape-heal{border-radius:50%;}
+  .shape-regen{border-radius:28%;}
+  .shape-tank{clip-path:polygon(25% 0%,75% 0%,100% 50%,75% 100%,25% 100%,0% 50%);}
+  .shape-utility{clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);}
+  .bst-txt{color:var(--muted);font-size:.72rem;}
   .filters{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0;}
   .filters input[type=text]{flex:1 1 200px;padding:9px 12px;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:var(--fg);font-size:.85rem;}
   .chip{padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:var(--card2);color:var(--fg);font-size:.72rem;cursor:pointer;}
@@ -123,6 +135,7 @@
   <div class="card" style="font-size:.78rem;line-height:1.6;">
     <b>Lưu ý:</b> trang này <u>không xếp Tier List</u> (S/A/B hay T0-T3) vì độ mạnh yếu phụ thuộc rất nhiều vào meta hiện tại, đội hình PvE hay PvP, và trình độ người chơi — dễ gây hiểu lầm nếu lấy 1 bảng cố định. Thay vào đó, mỗi Aniimo hiển thị <b>BST (tổng chỉ số gốc)</b> để tham khảo khách quan, và có gợi ý đội hình cụ thể theo mục đích (Tân thủ / PvE / PvP) ở tab <b>Đội Hình &amp; Gợi Ý</b>.
     <br><b>Tay đánh:</b> <span class="pill melee">Cận Chiến</span> đánh gần (melee), <span class="pill ranged">Tầm Xa</span> đánh xa (ranged), <span class="pill hybrid">Hỗn hợp</span> cả 2, <span class="pill unknown">Chưa rõ tay</span> chưa xác định được từ nguồn dữ liệu.
+    <br><b>Biểu tượng hệ:</b> màu + icon = Hệ nguyên tố (hệ phụ hiển thị chấm nhỏ bên cạnh, nếu có). <b>Hình khối huy hiệu:</b> nhọn=DPS, bát giác=Break, bo lệch=Support, tròn=Heal, vuông bo=Regen, lục giác=Tank, thoi=Utility.
   </div>
   <div class="filters">
     <input type="text" id="search" placeholder="Tìm tên Aniimo...">
@@ -300,6 +313,47 @@ const DATA = [{"num": "001", "name": "Emberpup", "elem": "Lửa", "role": "DPS",
 let activeElem = "all";
 let activeRange = "all";
 
+const ELEMENT_MAP = {
+  "Lửa":{c:"#e03131",icon:"fire"},
+  "Điện":{c:"#f08c00",icon:"electric"},
+  "Ánh Sáng":{c:"#fcc419",icon:"holy"},
+  "Thảo Mộc":{c:"#66a80f",icon:"grass"},
+  "Cỏ":{c:"#66a80f",icon:"grass"},
+  "Gió":{c:"#2f9e44",icon:"wind"},
+  "Nước":{c:"#1971c2",icon:"water"},
+  "Băng":{c:"#15aabf",icon:"ice"},
+  "Bóng Tối":{c:"#7048e8",icon:"dark"},
+  "Tối":{c:"#7048e8",icon:"dark"},
+  "Đất":{c:"#a67c52",icon:"rock"}
+};
+const ROLE_SHAPE_CLASS = {DPS:"shape-dps",Break:"shape-break",Support:"shape-support",Heal:"shape-heal",Regen:"shape-regen",Tank:"shape-tank",Utility:"shape-utility"};
+function badgeSvg(key){
+  const P = {
+    fire:'<path d="M12 2c-1.2 4-5 5.2-5 10a5 5 0 0010 0c0-1.8-.8-3-1.8-4 .1 2-.9 3.2-1.9 2.4 1.1-2 0-5.4-1.3-8.4z"/>',
+    electric:'<path d="M13 2 3 14h7l-1 8 11-14h-7z"/>',
+    holy:'<path d="M12 2l1.8 6.6L20 10l-6.2 1.6L12 18l-1.8-6.4L4 10l6.2-1.4z"/>',
+    grass:'<path d="M4 20c9 0 15-6 15-15 0 0-13-1-15 8-1.5 4.5.5 7 0 7z"/>',
+    wind:'<path d="M3 7h11a3 3 0 100-3"/><path d="M3 12h16a3 3 0 110 3"/><path d="M3 17h9a3 3 0 100 3"/>',
+    water:'<path d="M12 3c4.5 5 7 8.6 7 12a7 7 0 01-14 0c0-3.4 2.5-7 7-12z"/>',
+    ice:'<path d="M12 2v20M4.5 6.5l15 11M19.5 6.5l-15 11"/>',
+    dark:'<path d="M15.5 3a9 9 0 100 18 7.2 7.2 0 010-18z"/>',
+    rock:'<path d="M3 20l5.5-10 3.5 5.5 2.5-4.5L21 20z"/>'
+  };
+  return '<svg viewBox="0 0 24 24">' + (P[key]||P.rock) + '</svg>';
+}
+function elBadgeHTML(elemStr, role){
+  if(!elemStr) return '';
+  const parts = elemStr.split("/").map(s=>s.trim());
+  const shapeClass = ROLE_SHAPE_CLASS[role] || "shape-support";
+  const primary = ELEMENT_MAP[parts[0]] || {c:"#868e96",icon:"rock"};
+  let out = `<span class="el-badge ${shapeClass}" style="background:${primary.c}" title="${elemStr} · ${role||""}">${badgeSvg(primary.icon)}</span>`;
+  if(parts[1]){
+    const sec = ELEMENT_MAP[parts[1]] || {c:"#868e96",icon:"rock"};
+    out += `<span class="el-badge-mini" style="background:${sec.c}" title="${parts[1]}">${badgeSvg(sec.icon)}</span>`;
+  }
+  return out;
+}
+
 function rangeClass(r){
   if(r==="Cận Chiến") return "melee";
   if(r==="Tầm Xa") return "ranged";
@@ -346,7 +400,7 @@ function render(){
       <h4>#${d.num} ${d.name}</h4>
       <div class="meta">
         <span class="pill ${rangeClass(d.range)}">${d.range||"Chưa rõ tay"}</span>
-        ${d.elem} · ${d.role} · ${d.bst?("BST "+d.bst):""}
+        ${elBadgeHTML(d.elem, d.role)}<span class="bst-txt">${d.role}${d.bst?(" · BST "+d.bst):""}</span>
       </div>
       ${d.desc? `<div class="desc">${d.desc}</div>`:""}
       ${d.loc? `<div class="loc">${d.loc}</div>`:""}
