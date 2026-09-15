@@ -60,6 +60,9 @@ html = """<!doctype html>
   .shape-utility{clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);}
   .bst-txt{color:var(--muted);font-size:.72rem;}
   .pill.stage-lumin{background:#a5b4fc;color:#1a1a1a;} .pill.stage-gamma{background:#c084fc;color:#1a1a1a;} .pill.stage-nova{background:#fbbf24;color:#1a1a1a;}
+  .filters select{padding:9px 12px;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:var(--fg);font-size:.8rem;}
+  .chip.reset{background:var(--card2);font-weight:700;}
+  .chip .chip-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:middle;}
   .stat-line{display:flex;flex-wrap:wrap;gap:2px 10px;font-size:.68rem;color:var(--muted);margin-top:6px;border-top:1px dashed var(--border);padding-top:6px;font-variant-numeric:tabular-nums;}
   .stat-line b{color:var(--fg);font-weight:600;}
   .filters{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0;}
@@ -149,8 +152,18 @@ html = """<!doctype html>
   </div>
   <div class="filters">
     <input type="text" id="search" placeholder="Tìm tên Aniimo...">
+    <select id="sortSel">
+      <option value="num-asc">Sắp xếp: # tăng dần</option>
+      <option value="num-desc"># giảm dần</option>
+      <option value="bst-desc">BST cao → thấp</option>
+      <option value="bst-asc">BST thấp → cao</option>
+      <option value="name-asc">Tên A-Z</option>
+    </select>
+    <span class="chip reset" id="resetBtn">↺ Đặt lại bộ lọc</span>
   </div>
   <div class="filters" id="elemFilters"></div>
+  <div class="filters" id="roleFilters"></div>
+  <div class="filters" id="stageFilters"></div>
   <div class="filters" id="rangeFilters"></div>
   <div class="count" id="resultCount"></div>
   <div class="grid" id="dexGrid"></div>
@@ -321,7 +334,24 @@ html = """<!doctype html>
 const DATA = __DATA__;
 
 let activeElem = "all";
+let activeRole = "all";
+let activeStage = "all";
 let activeRange = "all";
+
+const ELEMENT_ORDER = ["Lửa","Điện","Ánh Sáng","Thảo Mộc","Gió","Nước","Băng","Bóng Tối","Đất"];
+const ROLE_ORDER = ["DPS","Break","Support","Heal","Regen","Tank","Utility"];
+const STAGE_ORDER = ["Lumin","Gamma","Nova"];
+function normElem(tok){
+  if(tok==="Cỏ") return "Thảo Mộc";
+  if(tok==="Tối") return "Bóng Tối";
+  return tok;
+}
+function elemParts(elemStr){
+  return (elemStr||"").split("/").map(s=>normElem(s.trim())).filter(Boolean);
+}
+function elemMatches(d, filterElem){
+  return elemParts(d.elem).includes(filterElem);
+}
 
 const ELEMENT_MAP = {
   "Lửa":{c:"#e03131",icon:"fire"},
@@ -373,16 +403,22 @@ function rangeClass(r){
 
 function uniq(arr){ return [...new Set(arr)]; }
 
-function renderFilters(){
-  const elems = uniq(DATA.map(d=>d.elem)).sort();
-  const elemBox = document.getElementById("elemFilters");
-  elemBox.innerHTML = '<span class="chip active" data-elem="all">Tất cả hệ</span>' + elems.map(e=>`<span class="chip" data-elem="${e}">${e}</span>`).join("");
-  elemBox.querySelectorAll(".chip").forEach(c=>c.addEventListener("click",()=>{
-    activeElem = c.dataset.elem;
-    elemBox.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));
+function makeChipRow(boxId, allLabel, options, stateGetSet, extraCls){
+  const box = document.getElementById(boxId);
+  box.innerHTML = `<span class="chip active" data-v="all">${allLabel}</span>` +
+    options.map(([v,label,dot])=>`<span class="chip" data-v="${v}">${dot? `<span class="chip-dot" style="background:${dot}"></span>`:""}${label}</span>`).join("");
+  box.querySelectorAll(".chip").forEach(c=>c.addEventListener("click",()=>{
+    stateGetSet(c.dataset.v);
+    box.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));
     c.classList.add("active");
     render();
   }));
+}
+
+function renderFilters(){
+  makeChipRow("elemFilters", "Tất cả hệ", ELEMENT_ORDER.map(e=>[e,e,(ELEMENT_MAP[e]||{}).c]), v=>activeElem=v);
+  makeChipRow("roleFilters", "Tất cả vai trò", ROLE_ORDER.map(r=>[r,r]), v=>activeRole=v);
+  makeChipRow("stageFilters", "Tất cả giai đoạn", STAGE_ORDER.map(s=>[s,s]), v=>activeStage=v);
 
   const ranges = [["Cận Chiến","🗡️ Cận Chiến (Melee)"],["Tầm Xa","🏹 Tầm Xa (Ranged)"],["Hỗn hợp","🔀 Hỗn hợp"]];
   const rangeBox = document.getElementById("rangeFilters");
@@ -393,17 +429,42 @@ function renderFilters(){
     c.classList.add("active");
     render();
   }));
+
+  document.getElementById("resetBtn").addEventListener("click", ()=>{
+    activeElem = activeRole = activeStage = activeRange = "all";
+    document.getElementById("search").value = "";
+    document.getElementById("sortSel").value = "num-asc";
+    document.querySelectorAll(".filters .chip[data-v], .filters .chip[data-range]").forEach(c=>{
+      c.classList.toggle("active", c.dataset.v==="all" || c.dataset.range==="all");
+    });
+    render();
+  });
+}
+
+function sortData(arr){
+  const sel = document.getElementById("sortSel").value;
+  const out = arr.slice();
+  const numOf = d => parseInt(String(d.num).replace(/\D/g,""),10) || 0;
+  if(sel==="num-desc") out.sort((a,b)=>numOf(b)-numOf(a));
+  else if(sel==="bst-desc") out.sort((a,b)=>(b.bst||0)-(a.bst||0));
+  else if(sel==="bst-asc") out.sort((a,b)=>(a.bst||0)-(b.bst||0));
+  else if(sel==="name-asc") out.sort((a,b)=>a.name.localeCompare(b.name,"vi"));
+  else out.sort((a,b)=>numOf(a)-numOf(b));
+  return out;
 }
 
 function render(){
   const q = document.getElementById("search").value.trim().toLowerCase();
   const grid = document.getElementById("dexGrid");
-  const filtered = DATA.filter(d=>{
-    if(activeElem!=="all" && d.elem!==activeElem) return false;
+  let filtered = DATA.filter(d=>{
+    if(activeElem!=="all" && !elemMatches(d, activeElem)) return false;
+    if(activeRole!=="all" && d.role!==activeRole) return false;
+    if(activeStage!=="all" && d.stage!==activeStage) return false;
     if(activeRange!=="all" && d.range!==activeRange) return false;
     if(q && !d.name.toLowerCase().includes(q)) return false;
     return true;
   });
+  filtered = sortData(filtered);
   document.getElementById("resultCount").textContent = `${filtered.length} / ${DATA.length} Aniimo`;
   grid.innerHTML = filtered.map(d=>`
     <div class="mon">
@@ -422,6 +483,7 @@ function render(){
 }
 
 document.getElementById("search").addEventListener("input", render);
+document.getElementById("sortSel").addEventListener("change", render);
 renderFilters();
 render();
 
