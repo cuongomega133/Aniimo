@@ -59,6 +59,9 @@ html = """<!doctype html>
   .shape-tank{clip-path:polygon(25% 0%,75% 0%,100% 50%,75% 100%,25% 100%,0% 50%);}
   .shape-utility{clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);}
   .bst-txt{color:var(--muted);font-size:.72rem;}
+  .pill.stage-lumin{background:#a5b4fc;color:#1a1a1a;} .pill.stage-gamma{background:#c084fc;color:#1a1a1a;} .pill.stage-nova{background:#fbbf24;color:#1a1a1a;}
+  .stat-line{display:flex;flex-wrap:wrap;gap:2px 10px;font-size:.68rem;color:var(--muted);margin-top:6px;border-top:1px dashed var(--border);padding-top:6px;font-variant-numeric:tabular-nums;}
+  .stat-line b{color:var(--fg);font-weight:600;}
   .filters{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0;}
   .filters input[type=text]{flex:1 1 200px;padding:9px 12px;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:var(--fg);font-size:.85rem;}
   .chip{padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:var(--card2);color:var(--fg);font-size:.72rem;cursor:pointer;}
@@ -142,6 +145,7 @@ html = """<!doctype html>
     <b>Lưu ý:</b> trang này <u>không xếp Tier List</u> (S/A/B hay T0-T3) vì độ mạnh yếu phụ thuộc rất nhiều vào meta hiện tại, đội hình PvE hay PvP, và trình độ người chơi — dễ gây hiểu lầm nếu lấy 1 bảng cố định. Thay vào đó, mỗi Aniimo hiển thị <b>BST (tổng chỉ số gốc)</b> để tham khảo khách quan, và có gợi ý đội hình cụ thể theo mục đích (Tân thủ / PvE / PvP) ở tab <b>Đội Hình &amp; Gợi Ý</b>.
     <br><b>Tay đánh:</b> <span class="pill melee">Cận Chiến</span> đánh gần (melee), <span class="pill ranged">Tầm Xa</span> đánh xa (ranged), <span class="pill hybrid">Hỗn hợp</span> cả 2, <span class="pill unknown">Chưa rõ tay</span> chưa xác định được từ nguồn dữ liệu.
     <br><b>Biểu tượng hệ:</b> màu + icon = Hệ nguyên tố (hệ phụ hiển thị chấm nhỏ bên cạnh, nếu có). <b>Hình khối huy hiệu:</b> nhọn=DPS, bát giác=Break, bo lệch=Support, tròn=Heal, vuông bo=Regen, lục giác=Tank, thoi=Utility.
+    <br><b>Giai đoạn</b> (<span class="pill stage-lumin">Lumin</span> <span class="pill stage-gamma">Gamma</span> <span class="pill stage-nova">Nova</span>): <u>ước tính</u> theo ngưỡng BST (chưa có dữ liệu chuỗi tiến hóa chính thức đầy đủ) — chỉ hiển thị cho 97 Aniimo có nguồn chính thức, không áp dụng cho các mục đánh dấu "fan guide VN". 6 chỉ số chi tiết (HP/ATK/M.DEF/P.DEF/BRK/REGEN) lấy từ wiki.koiseki.com/aniimo, cùng nguồn cho 97 mục này.
   </div>
   <div class="filters">
     <input type="text" id="search" placeholder="Tìm tên Aniimo...">
@@ -406,10 +410,12 @@ function render(){
       <h4>#${d.num} ${d.name}</h4>
       <div class="meta">
         <span class="pill ${rangeClass(d.range)}">${d.range||"Chưa rõ tay"}</span>
+        ${d.stage? `<span class="pill stage-${d.stage.toLowerCase()}">${d.stage}</span>`:""}
         ${elBadgeHTML(d.elem, d.role)}<span class="bst-txt">${d.role}${d.bst?(" · BST "+d.bst):""}</span>
       </div>
       ${d.desc? `<div class="desc">${d.desc}</div>`:""}
       ${d.loc? `<div class="loc">${d.loc}</div>`:""}
+      ${d.stats? `<div class="stat-line"><span><b>HP</b> ${d.stats.hp}</span><span><b>ATK</b> ${d.stats.atk}</span><span><b>M.DEF</b> ${d.stats.mdef}</span><span><b>P.DEF</b> ${d.stats.pdef}</span><span><b>BRK</b> ${d.stats.brk}</span><span><b>REGEN</b> ${d.stats.regen}</span></div>`:""}
       ${d.src==="vn"? `<div class="loc">⚠️ Nguồn: fan guide VN — chưa đối chiếu được với Aniidex chính thức</div>`:""}
     </div>
   `).join("");
