@@ -99,6 +99,7 @@ html = """<!doctype html>
   <button data-tab="tong-quan" class="active">Tổng Quan</button>
   <button data-tab="aniidex">Aniidex</button>
   <button data-tab="doi-hinh">Đội Hình &amp; Gợi Ý</button>
+  <button data-tab="he-thong">Hệ Thống</button>
   <button data-tab="vat-pham">Vật Phẩm</button>
   <button data-tab="nguoi-moi">Người Mới</button>
   <button data-tab="roadmap">Roadmap &amp; PvP</button>
@@ -137,6 +138,13 @@ html = """<!doctype html>
   <h2>Cross-progression</h2>
   <div class="card">
     <p>Liên kết tài khoản chỉ thực hiện <b>1 lần duy nhất</b> ở lần mở game đầu tiên trên console — nhập đúng email tài khoản cũ vào popup liên kết. Bỏ qua bước này sẽ tạo tài khoản mới <b>vĩnh viễn không thể</b> liên kết lại. Không hỗ trợ cross-server.</p>
+  </div>
+
+  <h2>🗺️ Bản đồ tương tác (Interactive Map)</h2>
+  <div class="card">
+    <p>Bản đồ vùng Idyll với <b>3.167 điểm đánh dấu trên 52 lớp lọc</b>: Treasures 1.555 điểm (Chests 768, Aniipods 573, Eggs 56, Lumin Amber 158) · Puzzles 106 điểm (Sanctums, Photo Challenges, Lumin/Memory Challenges) · Collection 1.249 điểm (hoa, cấu trúc, tài nguyên) · nhóm khác: Travel, Landmarks, Activities, Challenges (Alpha/Omega, Pathfinders).</p>
+    <p>Có thể bật/tắt từng lớp, tìm theo tên, đánh dấu điểm đã tìm (lưu cục bộ trình duyệt), và <b>chọn 1 Aniimo để xem vùng sinh sản (spawn zone)</b>. Sinh sản phụ thuộc 3 điều kiện: khu vực, thời tiết, ngày/đêm.</p>
+    <p style="font-size:.8rem;color:var(--muted)">⚠️ Dữ liệu lấy từ game build 1.0.0.7 (trước ra mắt) — vị trí có thể đổi khi phát hành. Xem bản đồ gốc tại aniimoguide.com/interactive-map.</p>
   </div>
 </section>
 
@@ -191,12 +199,61 @@ html = """<!doctype html>
   <h2>Đội hình PvP Meta (Holy Trinity)</h2>
   <div class="card"><p><b>Sát thủ:</b> Stellarys / Thornblade &nbsp;·&nbsp; <b>Cleanse bắt buộc:</b> Gracewing &nbsp;·&nbsp; <b>Breaker/CC:</b> Glancer / Fulmintis</p></div>
 
-  <h2>Đội hình PvE nổi bật</h2>
+  <h2>Đội hình PvE nổi bật (11 đội, nguồn team-builder)</h2>
+  <div class="tbl-wrap"><table>
+    <tr><th>Tên đội</th><th>Core</th><th>Vai trò / Chiến thuật</th></tr>
+    <tr><td>Electric Premium (2.110)</td><td>Blazen → Fulmintis → Luminelle → Turbo</td><td>Blazen mở khiên/gãy giáp, Luminelle buff Haste, Fulmintis tống sát thương</td></tr>
+    <tr><td>Dark Mark & Burst (2.077)</td><td>Rookey → Fragrancier → Stellarys → Witchin</td><td>Đánh dấu + phá giáp + dồn sát thương + hồi phục, early game</td></tr>
+    <tr><td>Dark One-Shot / Boss Killer (2.107)</td><td>Dreaple + Fragrancier → Inferlupa → Pawney</td><td>Giảm kháng → phá khiên → kết liễu (>297.000 sát thương ghi nhận)</td></tr>
+    <tr><td>Thornblade Crit Garden (2.089)</td><td>Thornblade / Melloblum / Somniwing / Glameep Prismana</td><td>Sát thương tại chỗ</td></tr>
+    <tr><td>Full Lightning Burst (2.097)</td><td>Fenmane / Luminelle / Dazmand / Glacy</td><td>Burst carry</td></tr>
+    <tr><td>Triple Fire Detonation (2.107)</td><td>Infergon / Flamerion / Magmarex / Glacy</td><td>Cày debuff rồi nổ</td></tr>
+    <tr><td>Black Hole Execution (2.105)</td><td>Pawney / Rookey / Witchin / Gracewing</td><td>Phạt đối phương bị khống chế</td></tr>
+    <tr><td>Magma Stack Engine (2.099)</td><td>Magmarex / Flamerion / Somniwing / Glacy</td><td>Break + áp lực liên tục</td></tr>
+    <tr><td>Shield and Flame Opener (1.882)</td><td>Helmut / Scorchhowl / Glacy / Somniwing</td><td>Break phòng thủ</td></tr>
+    <tr><td>Moonlight / Sunlight Starter Squad (2.100)</td><td>Lunara hoặc Helion / Rookey / Glacy / Somniwing</td><td>Đội hình theo Starter đã chọn</td></tr>
+    <tr><td>Blossom Clone Army (2.146)</td><td>Irisalis Prismana / Rookey / Glacy / Somniwing</td><td>Đội hình phân thân</td></tr>
+    <tr><td>Grass Crit Sanctuary / Thorn Bloom (2.076)</td><td>Gracewing / Thornblade / Melloblum / Tuckin</td><td>Hồi máu + thanh tẩy + chí mạng hệ Cỏ</td></tr>
+  </table></div>
+  <p style="font-size:.75rem;color:var(--muted)">Nguồn: aniimoguide.com/team-builder — số trong ngoặc là tổng chỉ số nền của đội, tự lắp thử tại team-builder để tính lại.</p>
+
+  <h2>🌾 Đội hình cày cấp (Farming/Leveling)</h2>
   <div class="card">
-    <p><b>Electric Premium:</b> Blazen → Fulmintis → Luminelle → Turbo</p>
-    <p><b>Dark One-Shot (Boss Killer):</b> Dreaple + Fragrancier → Inferlupa → Pawney</p>
-    <p><b>Full Lightning Burst:</b> Fenmane → Luminelle → Dazmand → Glacy</p>
-    <p><b>Grass Crit Sanctuary:</b> Gracewing → Thornblade → Melloblum → Tuckin</p>
+    <p>Chưa có đội hình cày cấp cụ thể nào được cộng đồng/wiki công bố chính thức tính đến 15/09/2026 — nguồn chỉ đưa khung vai trò: <b>Attrition</b> (Regen → Break → DPS, ưu tiên Regen hơn Heal, dùng cho farming loop dài hơi/rời máy quay lại) và <b>Traversal</b> (Support hệ Gió → DPS → Regen, đội chạy khám phá chứ không chiến đấu).</p>
+    <p>💡 <b>Gợi ý (khớp khung Attrition với đội hình đã có, không phải team được nguồn xác nhận riêng):</b> dùng <b>Witchin (Hồi phục) → Rookey (Phá giáp) → Stellarys (DPS)</b> làm đội cày cấp chủ lực — cả 3 cùng hệ Bóng Tối nên cộng hưởng tốt, đều Tier T0/T0.5 nên không cần đổi đội khi lên cấp. Muốn thêm hỗ trợ diện rộng thì ráp thêm Fragrancier (Support, Bóng Tối) thành đội 4.</p>
+  </div>
+</section>
+
+<section id="he-thong">
+  <h2>💪 4 Trụ cột tăng sức mạnh</h2>
+  <div class="card">
+    <p><b>1. Điểm Tiềm Năng (Potential Score):</b> Common → Uncommon → Rare → Epic → Legendary → Perfect. Tuyệt đối không dồn đá nâng cấp cao vào quái Common/Uncommon — luôn bắt 3-5 cá thể cùng loài để chọn con có tiềm năng Epic/Perfect.</p>
+    <p><b>2. Kế Thừa (Inheritance):</b> đưa quái Perfect vào trạm Kế Thừa tại Viện Polaris để hút 100% Level, EXP và phần lớn tài nguyên từ quái cũ sang quái mới — tài nguyên/công sức không hao hụt, nhưng <b>quái cũ bị tiêu hao, không giữ lại được cả 2 con</b>.</p>
+    <p><b>3. Tăng Sao Cộng Hưởng (Resonance Star-Up):</b> bắt nhiều cá thể trùng loài để dung hợp tăng sao; mỗi mốc sao mở khóa 1 nhánh Kỹ năng Nội tại (Passive Node) trong cây thiên phú.</p>
+    <p style="color:var(--muted)"><b>4. Khảm Cổ Ngữ (Rune Crafting):</b> <s>CDR / Break Efficiency / Tenacity / Crit</s> — trụ cột này đã bị gỡ bỏ hoàn toàn khỏi game trước ngày ra mắt (xem cảnh báo đầu trang), chỉ còn giá trị lịch sử.</p>
+  </div>
+
+  <h2>🧬 MBTI Trait — 16 tính cách bẩm sinh</h2>
+  <div class="tbl-wrap"><table>
+    <tr><th>Nhóm MBTI</th><th>Hiệu ứng</th></tr>
+    <tr><td>Chiến Binh (ENTJ/ESTP)</td><td>+15% ATK &amp; tỉ lệ bạo kích</td></tr>
+    <tr><td>Học Giả (INTJ/INTP)</td><td>+15% SP.ATK &amp; năng lượng chiêu</td></tr>
+    <tr><td>Hộ Vệ (ISFJ/ISTJ)</td><td>+15% DEF &amp; kháng khống chế</td></tr>
+    <tr><td>Cơ Động (ENFP/ESFP)</td><td>+15% SPD &amp; tốc độ hồi Dash</td></tr>
+  </table></div>
+  <div class="card"><p>Mỗi Aniimo sinh ra ngẫu nhiên mang 1 trong 16 tính cách, cộng hưởng trực tiếp vào 6 chỉ số cốt lõi (HP/ATK/DEF/SP.ATK/SP.DEF/SPD). <b>Lộ trình F2P đạt Perfect 100% không tốn nạp:</b> dùng <b>Resonance Training</b> tại Viện Polaris để chuyển Tiềm Năng Tích Lũy (Acquired) bù đắp cho Tiềm Năng Bẩm Sinh (Innate) còn thiếu.</p></div>
+
+  <h2>📖 Sổ tay Aniilog &amp; 4 Ô Phụ Kiện</h2>
+  <div class="card">
+    <p>Mỗi loài có <b>9 danh mục nghiên cứu sinh thái</b> (bắt số lượng, đánh bại, kích hoạt Break, chứng kiến kỹ năng, chụp ảnh sinh thái...). Hoàn thành → tích <b>Research Points</b> → nâng bậc Tier nghiên cứu: Tier 1&2 mở 2 Ô Phụ Kiện (Amulets), Tier 3&4 (Max) mở Slot 3&4 + Rune Huyền Thoại khu Breezy Plains.</p>
+    <p><b>Chiến lược:</b> max Tier 4 cho 3 con chủ lực trước để có đủ 12 slot phụ kiện cho cả đội. Bắt loài mới lần đầu (ghi danh Aniilog) = hệ số x3-x5 EXP + Research Points.</p>
+  </div>
+
+  <h2>🔮 Toàn tập Tiến hóa (Evolution)</h2>
+  <div class="card">
+    <p>Game có <b>57 loại đá/lõi tiến hóa</b> (Blaze Stone, Dark Shard, Ether Heart...), cày tại Phó bản Nguyên tố hàng ngày hoặc khai thác quặng hang động ngầm.</p>
+    <p><b>Điều kiện ẩn khi tiến hóa:</b> Thời gian (một số loài chỉ sáng nút tiến hóa lúc Hoàng Hôn/Nửa Đêm) · Địa điểm (đứng cạnh Bàn Tế Cổ hoặc đốt lửa trại) · Kỹ năng tiên quyết (nâng tối thiểu 1 kỹ năng nội tại lên cấp 3).</p>
+    <p style="font-size:.8rem;color:var(--muted)">Ví dụ nhánh ẩn Nova: Flameruff thường tiến hóa thành Pyrowolf, nhưng nếu Bond cấp 5 + Nv35+ + đưa tới Cinder Altar lúc 00:00-02:00 sương mù + thắng solo 3 đợt thử thách không dùng đồ → nhận Infernal Ember → tiến hóa thành Inferlupa (Hỏa/Ám, tier cao nhất).</p>
   </div>
 </section>
 
@@ -224,6 +281,47 @@ html = """<!doctype html>
     <tr><td>Omega</td><td>Boss khổng lồ loại 2, cơ chế khác Alpha</td><td>4 điểm</td></tr>
   </table></div>
   <div class="card"><p>💡 Mẹo: dùng <b>Sparkling Cube</b> lên Prismana miễn phí (từ Prismana Promise) → có ngay bản vừa Prismana vừa Sparkling, không cần roll.</p></div>
+
+  <h2>⚔️ Vật phẩm mang theo (Carried Items) — 24 món</h2>
+  <div class="card">
+    <p><b>Damage Amp (11 món, DPS):</b> Ferocious Fang, Explosive Gloves, Fission Needles, Ambusher's Cloak, Capacitous Battery, Destiny's Dice, Echoing Grimoire, Finisher Bell, Heartseeker Pendant, Supreme Elixir, Vanguard's Whistle.</p>
+    <p><b>REGEN (3 món, Support):</b> Spirited Feather, Auspicious Bell, Pearl of the Sea.</p>
+    <p><b>BREAK (2 món):</b> Gargantuan Claw, Avenging Gear.</p>
+    <p><b>HP / sinh tồn (7 món):</b> Giant Tortoise Shell, Heritage Amulet, Lightning Needle, Marching Flask, Nature's Breath, Rekindling Feather, Seeds of Spring.</p>
+    <p><b>Heal (1 món):</b> Miraculous Fleece — chuyển 30% lượng hồi máu dư thừa sang đồng đội máu thấp nhất.</p>
+    <p style="font-size:.75rem;color:var(--muted)">Nguồn chính: Pawprint Shop (250 Paw Coin/món) · một số rơi từ Alpha Aniimo (Ignitis, Irisal, Magmarex, Minespine) · 4 món từ Holo-Battle Sim.</p>
+  </div>
+
+  <h2>🎯 Build khuyến nghị theo từng Aniimo (12 build)</h2>
+  <div class="tbl-wrap"><table>
+    <tr><th>Aniimo</th><th>Vật phẩm</th><th>Chiến thuật</th></tr>
+    <tr><td>Blazen</td><td>Gargantuan Horn +15</td><td>Phá giáp trước, sát thương sau</td></tr>
+    <tr><td>Infergon</td><td>Ferocious Fang +15</td><td>Bung sát thương sau khi phá giáp</td></tr>
+    <tr><td>Stellarys</td><td>Heartseeker Pendant +15</td><td>Đừng bỏ qua đòn thường của Stellarys</td></tr>
+    <tr><td>Fenmane</td><td>Giant Tortoise Shell +15</td><td>Trâu hơn một chút, vẫn đánh đau</td></tr>
+    <tr><td>Pawney</td><td>Ferocious Fang +15</td><td>Sát thương lớn bắt đầu SAU khi phá giáp</td></tr>
+    <tr><td>Luminelle</td><td>Ferocious Fang +15</td><td>ATK cho đội hình hệ Điện</td></tr>
+    <tr><td>Ignitis</td><td>Finisher Bell +15</td><td>Hạ 1 Dark Soul dọn đường cho đòn kết liễu tiếp theo</td></tr>
+    <tr><td>Fulmintis</td><td>Spirited Feather +15</td><td>Spam skill Lightning Rush</td></tr>
+    <tr><td>Sherro</td><td>Ferocious Fang +15</td><td>Đánh quanh vũng nước, để Sherro tự chém</td></tr>
+    <tr><td>Gracewing</td><td>Miraculous Fleece +15</td><td>Hồi máu từ băng ghế dự bị</td></tr>
+    <tr><td>Glacy</td><td>Miraculous Fleece +15</td><td>Healer chính của đội</td></tr>
+    <tr><td>Magmarex</td><td>Gargantuan Horn +15</td><td>Dồn hiệu ứng lửa trước, để Magmarex tung cú đấm</td></tr>
+  </table></div>
+  <p style="font-size:.75rem;color:var(--muted)">⚠️ Nguồn aniidex.com/builds ghi "Gargantuan Horn", còn danh sách Carried Items gốc ở trên (aniimoguide.com) ghi tên "Gargantuan Claw" ở đúng vị trí nhóm BREAK — nhiều khả năng cùng 1 món bị đổi tên/dịch khác giữa 2 nguồn, chưa xác nhận chắc chắn. Các món còn lại khớp hoàn toàn giữa 2 nguồn. Đây chỉ mới 12/roster, chưa phải toàn bộ build.</p>
+
+  <h2>👕 Trang phục (412 món) &amp; Thành tựu (83 huy hiệu)</h2>
+  <div class="card">
+    <p><b>Outfits:</b> Kiểu tóc (40), Áo (26), Quần (16), Giày (25), Găng tay (21), Vớ (12), Trang điểm (113), Phụ kiện (82), Bộ trọn (32), Gói quà (41), Thẻ mở khóa đặc biệt (4). Chỉ mang tính thẩm mỹ, không ảnh hưởng chỉ số. Bộ nổi bật: Institute Uniform, Frostburst Punk, Silent Owl Spirit, Starlight Cloak.</p>
+  </div>
+  <div class="tbl-wrap"><table>
+    <tr><th>Nhánh thành tựu</th><th>Số huy hiệu</th><th>Chủ đề</th></tr>
+    <tr><td>Path of Twining</td><td>64</td><td>Khám phá thế giới</td></tr>
+    <tr><td>Path of Victory</td><td>10</td><td>Chiến đấu</td></tr>
+    <tr><td>Path of Discovery</td><td>5</td><td>Khám phá vùng cụ thể</td></tr>
+    <tr><td>Path of Splendor</td><td>3</td><td>Xây dựng Homeland</td></tr>
+    <tr><td>Keepsakes</td><td>1</td><td>Kỷ niệm (Starbound Journey)</td></tr>
+  </table></div>
 </section>
 
 <section id="nguoi-moi">
@@ -236,6 +334,9 @@ html = """<!doctype html>
     <tr><td>Nhược</td><td>Cần setup, ít burst</td><td>Cận chiến cần né đòn chuẩn</td></tr>
   </table></div>
   <p style="font-size:.8rem;color:var(--muted)">Quyết định gần như vĩnh viễn — hiện chưa có cách nào khác để có 2 Starter này.</p>
+  <div class="card" style="border-color:var(--good)">
+    <p>✅ <b>Xác nhận (đối chiếu 2 nguồn độc lập — aniimotools.dev &amp; aniimoguide.com):</b> chọn Lunara hay Helion <b>không giới hạn hay ảnh hưởng gì tới PvP hoặc bất kỳ hệ thống nào về sau</b>. Đội hình chính về sau ráp từ toàn bộ hơn 90 Aniimo trong game, không phụ thuộc Starter ban đầu. Tin đồn "5 Starter" lan truyền chỉ xuất phát từ 1 video fan-made, không phải thông tin chính thức.</p>
+  </div>
 
   <h2>10 việc nên làm đầu tiên</h2>
   <div class="card"><ul>
@@ -253,19 +354,38 @@ html = """<!doctype html>
 
   <h2>6 Prismana miễn phí (chọn lúc Junior Wayfarer)</h2>
   <div class="tbl-wrap"><table>
-    <tr><th>Prismana</th><th>Hệ/Vai trò</th><th>Điểm mạnh</th></tr>
-    <tr><td>Witchin</td><td>Tối · Healer</td><td>BST cao nhất (530), healer duy nhất trong 6 lựa chọn</td></tr>
-    <tr><td>Grizbo</td><td>Đất · DPS</td><td>Đòn đánh mạnh nhất nhóm (Rock Smash 227)</td></tr>
-    <tr><td>Pawney</td><td>Tối · DPS</td><td>ATK cao nhất nhóm (128)</td></tr>
-    <tr><td>Thornblade</td><td>Cỏ · DPS</td><td>Sword Dance cộng dồn, thưởng lối chơi kiên trì</td></tr>
-    <tr><td>Turbo</td><td>Gió · Support</td><td>Skill miễn phí mỗi 25s, 5 biến thể form</td></tr>
-    <tr><td>Scorchhowl</td><td>Lửa · DPS</td><td>6 biến thể form, bỏng cộng dồn</td></tr>
+    <tr><th>Prismana</th><th>Hệ/Vai trò</th><th>Điểm mạnh</th><th>Điểm yếu</th></tr>
+    <tr><td>Witchin</td><td>Tối · Healer</td><td>BST cao nhất (530), healer duy nhất trong 6 lựa chọn, debuff hữu dụng xuyên suốt game</td><td>Yếu trước hệ Đất</td></tr>
+    <tr><td>Grizbo</td><td>Đất · DPS</td><td>BST cao thứ 2 (524), đòn đánh mạnh nhất nhóm (Rock Smash 227)</td><td>Ít biến thể nhất</td></tr>
+    <tr><td>Pawney</td><td>Tối · DPS</td><td>ATK cao nhất nhóm (128), Break trên trung bình (55)</td><td>Không bắt được ngoài tự nhiên (phải tiến hóa từ Helmut), BST thấp hơn (512)</td></tr>
+    <tr><td>Thornblade</td><td>Cỏ · DPS</td><td>Sword Dance cộng dồn, thưởng lối chơi kiên trì, ATK khá (121)</td><td>Phòng thủ yếu nhất (70/70), BST thấp nhất (499)</td></tr>
+    <tr><td>Turbo</td><td>Gió · Support</td><td>Skill miễn phí mỗi 25s, 5 biến thể form</td><td>Ít đóng góp sát thương trực quan</td></tr>
+    <tr><td>Scorchhowl</td><td>Lửa · DPS</td><td>Ngoại hình được yêu thích nhất, 6 biến thể form, bỏng cộng dồn</td><td>BST thấp nhất nhóm (495)</td></tr>
   </table></div>
+  <div class="card"><p>💡 <b>Mẹo Guaranteed Sparkling:</b> dùng 1 Sparkling Cube kiếm sớm áp lên Prismana miễn phí đã chọn → có ngay bản đảm bảo 100% vừa Prismana vừa Sparkling, không cần roll ngẫu nhiên.</p></div>
 
   <h2>Homeland — 13 công việc &amp; bậc RV</h2>
   <div class="card">
-    <p>9 job hệ nguyên tố + 4 job chung (Carry, Artisanship, Leisure, Perfumery). Nguyên tắc: phủ đủ job cần trước, rồi mới nâng job yếu nhất.</p>
-    <p><b>Đội khởi đầu tốt (RV2, 8 slot):</b> Turbo, Shrubclaw, Fragrancier, Thornblade, Stellarys, Glacy, Emberpup (tạm), Pranky (tạm).</p>
+    <p>9 job hệ nguyên tố: Fire, Water, Grass, Earth, Lightning, Ice, Wind, Dark, Light + 4 job chung: Carry (vận chuyển), Artisanship (chế tác), Leisure (giải trí), Perfumery (nước hoa). <b>Nguyên tắc cốt lõi:</b> phủ đủ job cần trước, rồi mới nâng job yếu nhất.</p>
+    <p><b>Đội khởi đầu tốt (RV2, 8 slot):</b> Turbo (Gió3, Leisure3), Shrubclaw (Đất3, Cỏ3, Carry1), Fragrancier (Tối3, Leisure3, Perfumery3), Thornblade (Cỏ3, Artisanship3), Stellarys (Tối3, Leisure3), Glacy (Nước3, Băng3, Carry1), Emberpup (Lửa1, Carry1 — tạm), Pranky (Nước2, Carry1 — tạm).</p>
+    <p><b>Nhân công nổi bật về sau:</b> Grizbo (RV6): Đất3, Carry3 — "con bài lớn" vận chuyển · Blazen (RV3): Điện3, Artisanship3 — lấp hệ Điện.</p>
+  </div>
+  <div class="tbl-wrap"><table>
+    <tr><th>Bậc RV</th><th>Sức chứa</th><th>Điều kiện</th></tr>
+    <tr><td>1</td><td>0 (thủ công)</td><td>Giai đoạn Tutorial</td></tr>
+    <tr><td>2</td><td>8</td><td>Intermediate Student (Pathfinder 25+)</td></tr>
+    <tr><td>3</td><td>11</td><td>Intermediate Student</td></tr>
+    <tr><td>4</td><td>14</td><td>Intermediate Student</td></tr>
+    <tr><td>5</td><td>17</td><td>Veteran Student (Pathfinder 35+)</td></tr>
+    <tr><td>6</td><td>20</td><td>Beginner Wayfarer (Pathfinder 40+)</td></tr>
+    <tr><td>7</td><td>23</td><td>Beginner Wayfarer</td></tr>
+    <tr><td>8</td><td>26</td><td>Intermediate Wayfarer (Pathfinder 45+)</td></tr>
+    <tr><td>9</td><td>30</td><td>Veteran Wayfarer (Pathfinder 50+)</td></tr>
+    <tr><td>10</td><td>không tăng thêm</td><td>Mốc cuối bản Beta</td></tr>
+  </table></div>
+  <div class="card">
+    <p><b>Tốc độ làm việc (workload/phút):</b> Cấp1 = 60 · Cấp2 = 75 (+25%) · Cấp3 = 90 (+50%) · Cấp4 = 105 (+75%). Phủ đủ công việc quan trọng hơn chỉ số cao ở việc không dùng đến.</p>
+    <p style="font-size:.8rem;color:var(--muted)">Quy tắc: nhân công đã gán Homeland không thể đồng thời chiến đấu · hết thức ăn nhân công → dừng sản xuất · nhân công đa năng (nhiều job) rất quý vì slot có hạn · form đặc biệt mở khóa job cấp 4 (rất cuối game).</p>
   </div>
 </section>
 
@@ -312,6 +432,12 @@ html = """<!doctype html>
     <p><b>Tuần 5-6 (15-28/10):</b> Prismana Flow cực hạn, mở chuỗi tiến hóa Inferlupa.</p>
     <p><b>Sự kiện dài:</b> Tracing the Trail (20/09–09/12), Legendary Journey: Irisalis (25/09–09/12).</p>
     <p><b>Vein Abundance (tăng tỉ lệ Prismana):</b> 18-20/09 Forest of Falling Stars → 21-27/09 Glynsera → 28/09-04/10 Melloblum → 05-11/10 Waleetle → 12-18/10 Inferlupa → 19-25/10 Carnival (cả 4).</p>
+  </div>
+
+  <h2>⚠️ Thực trạng hướng dẫn sự kiện</h2>
+  <div class="card" style="border-color:var(--warn)">
+    <p>Tính đến 15/09/2026 (1 ngày trước ra mắt), trang sự kiện của aniimoguide.com <b>chỉ có hướng dẫn hành động cụ thể cho 2 sự kiện</b>: <b>Prismana Promise</b> (đạt Junior Wayfarer → chọn 1 Prismana miễn phí, xem tab Người Mới) và <b>Set Out, Pathfinder!</b> (đăng nhập đủ 7 lần điểm danh, không cần liên tục → nhận trọn quà lộ trình).</p>
+    <p>Các sự kiện còn lại (Journey Handbook, Who's That Aniimo?, Idyll Ecological Investigation, Vein Abundance, Eggceleration, Glamour Star, Tracing the Trail, Journey Moments...) hiện <b>chỉ công bố ngày tháng, chưa công bố cách chơi/nhiệm vụ cụ thể</b> — sẽ cập nhật sau khi game ra mắt và cộng đồng chơi thử.</p>
   </div>
 
   <h2>Quà Pre-Registration (30 triệu đăng ký)</h2>
