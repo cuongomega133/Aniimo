@@ -45,8 +45,6 @@ html = """<!doctype html>
   .pill.t0{background:#f43f5e;color:#fff;} .pill.t05{background:#fb923c;color:#1a1a1a;}
   .pill.t1{background:#facc15;color:#1a1a1a;} .pill.t2{background:#4ade80;color:#1a1a1a;}
   .pill.t25{background:#38bdf8;color:#1a1a1a;} .pill.t3{background:#94a3b8;color:#1a1a1a;}
-  .pill.melee{background:#e11d48;color:#fff;} .pill.ranged{background:#6366f1;color:#fff;}
-  .pill.hybrid{background:#a855f7;color:#fff;} .pill.unknown{background:var(--card2);color:var(--muted);border:1px solid var(--border);}
   .el-badge{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;margin-right:4px;vertical-align:middle;flex:none;}
   .el-badge svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
   .el-badge-mini{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;margin-right:4px;vertical-align:middle;opacity:.92;flex:none;}
@@ -146,7 +144,6 @@ html = """<!doctype html>
   <h2>Bách khoa Aniimo (Aniidex)</h2>
   <div class="card" style="font-size:.78rem;line-height:1.6;">
     <b>Lưu ý:</b> trang này <u>không xếp Tier List</u> (S/A/B hay T0-T3) vì độ mạnh yếu phụ thuộc rất nhiều vào meta hiện tại, đội hình PvE hay PvP, và trình độ người chơi — dễ gây hiểu lầm nếu lấy 1 bảng cố định. Thay vào đó, mỗi Aniimo hiển thị <b>BST (tổng chỉ số gốc)</b> để tham khảo khách quan, và có gợi ý đội hình cụ thể theo mục đích (Tân thủ / PvE / PvP) ở tab <b>Đội Hình &amp; Gợi Ý</b>.
-    <br><b>Tay đánh:</b> <span class="pill melee">Cận Chiến</span> đánh gần (melee), <span class="pill ranged">Tầm Xa</span> đánh xa (ranged), <span class="pill hybrid">Hỗn hợp</span> cả 2, <span class="pill unknown">Chưa rõ tay</span> chưa xác định được từ nguồn dữ liệu.
     <br><b>Biểu tượng hệ:</b> màu + icon = Hệ nguyên tố (hệ phụ hiển thị chấm nhỏ bên cạnh, nếu có). <b>Hình khối huy hiệu:</b> nhọn=DPS, bát giác=Break, bo lệch=Support, tròn=Heal, vuông bo=Regen, lục giác=Tank, thoi=Utility.
     <br><b>Giai đoạn</b> (<span class="pill stage-lumin">Lumin</span> <span class="pill stage-gamma">Gamma</span> <span class="pill stage-nova">Nova</span>): <u>ước tính</u> theo ngưỡng BST (chưa có dữ liệu chuỗi tiến hóa chính thức đầy đủ) — chỉ hiển thị cho 97 Aniimo có nguồn chính thức, không áp dụng cho các mục đánh dấu "fan guide VN". 6 chỉ số chi tiết (HP/ATK/M.DEF/P.DEF/BRK/REGEN) lấy từ wiki.koiseki.com/aniimo, cùng nguồn cho 97 mục này.
   </div>
@@ -164,7 +161,6 @@ html = """<!doctype html>
   <div class="filters" id="elemFilters"></div>
   <div class="filters" id="roleFilters"></div>
   <div class="filters" id="stageFilters"></div>
-  <div class="filters" id="rangeFilters"></div>
   <div class="count" id="resultCount"></div>
   <div class="grid" id="dexGrid"></div>
 </section>
@@ -336,7 +332,6 @@ const DATA = __DATA__;
 let activeElem = "all";
 let activeRole = "all";
 let activeStage = "all";
-let activeRange = "all";
 
 const ELEMENT_ORDER = ["Lửa","Điện","Ánh Sáng","Thảo Mộc","Gió","Nước","Băng","Bóng Tối","Đất"];
 const ROLE_ORDER = ["DPS","Break","Support","Heal","Regen","Tank","Utility"];
@@ -394,13 +389,6 @@ function elBadgeHTML(elemStr, role){
   return out;
 }
 
-function rangeClass(r){
-  if(r==="Cận Chiến") return "melee";
-  if(r==="Tầm Xa") return "ranged";
-  if(r==="Hỗn hợp") return "hybrid";
-  return "unknown";
-}
-
 function uniq(arr){ return [...new Set(arr)]; }
 
 function makeChipRow(boxId, allLabel, options, stateGetSet, extraCls){
@@ -420,22 +408,12 @@ function renderFilters(){
   makeChipRow("roleFilters", "Tất cả vai trò", ROLE_ORDER.map(r=>[r,r]), v=>activeRole=v);
   makeChipRow("stageFilters", "Tất cả giai đoạn", STAGE_ORDER.map(s=>[s,s]), v=>activeStage=v);
 
-  const ranges = [["Cận Chiến","🗡️ Cận Chiến (Melee)"],["Tầm Xa","🏹 Tầm Xa (Ranged)"],["Hỗn hợp","🔀 Hỗn hợp"]];
-  const rangeBox = document.getElementById("rangeFilters");
-  rangeBox.innerHTML = '<span class="chip active" data-range="all">Tất cả tay đánh</span>' + ranges.map(([v,l])=>`<span class="chip" data-range="${v}">${l}</span>`).join("");
-  rangeBox.querySelectorAll(".chip").forEach(c=>c.addEventListener("click",()=>{
-    activeRange = c.dataset.range;
-    rangeBox.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));
-    c.classList.add("active");
-    render();
-  }));
-
   document.getElementById("resetBtn").addEventListener("click", ()=>{
-    activeElem = activeRole = activeStage = activeRange = "all";
+    activeElem = activeRole = activeStage = "all";
     document.getElementById("search").value = "";
     document.getElementById("sortSel").value = "num-asc";
-    document.querySelectorAll(".filters .chip[data-v], .filters .chip[data-range]").forEach(c=>{
-      c.classList.toggle("active", c.dataset.v==="all" || c.dataset.range==="all");
+    document.querySelectorAll(".filters .chip[data-v]").forEach(c=>{
+      c.classList.toggle("active", c.dataset.v==="all");
     });
     render();
   });
@@ -460,7 +438,6 @@ function render(){
     if(activeElem!=="all" && !elemMatches(d, activeElem)) return false;
     if(activeRole!=="all" && d.role!==activeRole) return false;
     if(activeStage!=="all" && d.stage!==activeStage) return false;
-    if(activeRange!=="all" && d.range!==activeRange) return false;
     if(q && !d.name.toLowerCase().includes(q)) return false;
     return true;
   });
@@ -470,7 +447,6 @@ function render(){
     <div class="mon">
       <h4>#${d.num} ${d.name}</h4>
       <div class="meta">
-        <span class="pill ${rangeClass(d.range)}">${d.range||"Chưa rõ tay"}</span>
         ${d.stage? `<span class="pill stage-${d.stage.toLowerCase()}">${d.stage}</span>`:""}
         ${elBadgeHTML(d.elem, d.role)}<span class="bst-txt">${d.role}${d.bst?(" · BST "+d.bst):""}</span>
       </div>
